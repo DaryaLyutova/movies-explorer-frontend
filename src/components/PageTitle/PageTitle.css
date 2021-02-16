@@ -1,0 +1,23 @@
+.page-title {
+    display: flex;
+    flex-direction: column;
+    padding: 110px 70px 0 70px;
+}
+
+.page-title__title {
+    padding: 0 0 23px 0;
+    margin: 0;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    color: #000000;
+}
+
+.page-title__line {
+    color: rgba(0, 0, 0, 1);
+    border-bottom: 1px solid;
+    text-align: center;
+}
