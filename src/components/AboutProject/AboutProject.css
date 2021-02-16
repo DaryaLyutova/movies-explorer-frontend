@@ -1,15 +1,15 @@
 .about-project {
     display: flex;
-    /* flex-direction: row; */
-    padding: 70px 70px 110px 70px;
+    flex-direction: column;
+    padding: 10px 70px 110px 70px;
 }
 
 .about-project__items {
-    padding: 0;
+    padding: 70px 0 0;
     margin: 0;
     display: flex;
     flex-direction: row;
-    list-style-type: none;    
+    list-style-type: none;
 }
 
 .about-project__item {
@@ -39,4 +39,60 @@
     line-height: 20px;
     color: #000000;
     margin: 0;
+}
+
+.about-project__scheme {
+    padding: 110px 0 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+}
+
+.about-project__scheme-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.about-project__scheme-indicator{
+    display: flex;
+    height: 36px;    
+    margin: 0;
+    align-items: center;
+    justify-content: center;
+}
+
+.about-project__scheme-indicator_green {
+    width: 288px;
+    background-color: #2BE080;;
+}
+
+.about-project__scheme-indicator_grey {
+    max-width: 912px;
+    width: 100%;
+    background-color: #F2F2F2;
+}
+
+.about-project__time {
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+.about-project__type {
+    font-family: Suisse Intl;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+    color: #A0A0A0;
+    margin: 14px 0 0;
 }
