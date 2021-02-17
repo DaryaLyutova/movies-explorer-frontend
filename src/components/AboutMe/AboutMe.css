@@ -1,0 +1,60 @@
+.aboutMe {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 70px 100px 70px;
+    font-family: Inter;
+    font-style: normal;
+    color: #000000;
+}
+
+.aboutMe__description {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.aboutMe__info {
+    display: flex;
+    flex-direction: column;
+}
+
+.aboutMe__title {
+    font-weight: normal;
+    font-size: 50px;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+    padding: 66px 0 18px 0;
+    margin: 0;
+}
+
+.aboutMe__subtitle {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 20px;
+    max-width: 600px;
+    mix-blend-mode: normal;
+    padding: 0;
+    margin: 0;
+}
+
+.aboutMe__subtitle_text {
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 22px;
+    padding: 26px 0 99px 0;
+}
+
+.aboutMe__links {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 0;
+}
+
+.aboutMe__photo {
+    width: 270px;
+    height: 327px;
+    border-radius: 10px;
+    padding-top: 66px;
+}
