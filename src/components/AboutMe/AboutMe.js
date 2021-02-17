@@ -1,7 +1,6 @@
 import React from 'react';
 import './AboutMe.css';
 import PageTitle from '../PageTitle/PageTitle';
-// import { NavLink } from 'react-router-dom';
 import myPhoto from '../../images/my-photo.jpg';
 
 function AboutMe() {
@@ -18,8 +17,8 @@ function AboutMe() {
                         кодить и поняла, что это именно то, чем я хочу заниматься.
                 </p>
                     <nav className="aboutMe__links">
-                        <a exact to="/" className="aboutMe__link">Facebook</a>
-                        <a to="https://github.com/DaryaLyutova" className="aboutMe__link">Github</a>
+                        <a href="https://github.com/DaryaLyutova" className="aboutMe__link">Facebook</a>
+                        <a href="https://github.com/DaryaLyutova" className="aboutMe__link">Github</a>
                     </nav>
                 </div>
                 <img src={myPhoto} alt="моя фотография" className="aboutMe__photo" />

@@ -52,6 +52,17 @@
     margin: 0;
 }
 
+.aboutMe__link {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+    color: #000;
+}
+
+.aboutMe__link:first-of-type {
+    padding-right: 20px;
+}
+
 .aboutMe__photo {
     width: 270px;
     height: 327px;
