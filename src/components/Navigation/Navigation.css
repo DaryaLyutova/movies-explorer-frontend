@@ -2,9 +2,6 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    /* включаем при авторизации */
-    justify-content: space-between; 
-    /* justify-content: flex-end; */
     width: 100%;
     max-width: 746px;
     padding-right: 70px;
@@ -101,6 +98,6 @@
 }
 
 /* меняем при авторизации */
-/* .navigation__visible {
+.navigation__visible {
     display: none;
-} */
+}

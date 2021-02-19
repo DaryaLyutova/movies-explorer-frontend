@@ -1,12 +1,33 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Navigation.css';
 import menLogo from '../../images/men-logo.svg';
 
+
 function Navigation() {
+
+    const [componentVisible, isComponentVisible] = React.useState(true);
+    const location = useLocation();
+
+    function handelHeaderTitle() {
+        if (location.pathname === '/movies' ||  location.pathname === '/saved-movies') {
+            isComponentVisible(false)
+        } else {
+            if (location.pathname === '/') {
+                isComponentVisible(true)
+            }
+        }
+    }
+
+    React.useEffect(() => {
+        handelHeaderTitle();
+    }, [location.pathname])
+
     return (
-        <nav className="navigation">
-            <ul className="navigation__movies navigation__visible">
+        <nav 
+        className="navigation"
+        style={{ justifyContent: componentVisible ? 'flex-end' : 'space-between'}}>
+            <ul className={`navigation__movies ${componentVisible ? 'navigation__visible' : ''}`}>
                 <li>
                     <Link
                         to="/movies"
@@ -20,7 +41,7 @@ function Navigation() {
                         Сохранённые фильмы</Link>
                 </li>
             </ul>
-            <ul className="navigation__user">
+            <ul className={`navigation__user ${!componentVisible ? 'navigation__visible' : ''}`}>
                 <li>
                     <Link
                         to="/signin"
@@ -35,12 +56,12 @@ function Navigation() {
                 </li>
             </ul>
             <Link
-                to="/profile" className="navigation__button-accaunt button-defolt-style navigation__visible">Аккаунт
+                to="/profile" className={`navigation__button-accaunt ${componentVisible ? 'navigation__visible' : ''}`}>Аккаунт
             <div className="navigation__button-accaunt-circle">
                     <img src={menLogo} alt="логотип аккаунта" className="navigation-logo" />
                 </div>
             </Link>
-        </nav>
+        </nav >
     )
 }
 
