@@ -4,7 +4,7 @@ import './Navigation.css';
 import menLogo from '../../images/men-logo.svg';
 
 
-function Navigation() {
+function Navigation(props) {
 
     const [componentVisible, isComponentVisible] = React.useState(true);
     const location = useLocation();
@@ -25,7 +25,7 @@ function Navigation() {
 
     return (
         <nav 
-        className="navigation"
+        className={`navigation ${!props.visible ? 'navigation__visible' : ''}`}
         style={{ justifyContent: componentVisible ? 'flex-end' : 'space-between'}}>
             <ul className={`navigation__movies ${componentVisible ? 'navigation__visible' : ''}`}>
                 <li>
