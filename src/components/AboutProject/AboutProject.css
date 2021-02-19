@@ -52,6 +52,12 @@
 .about-project__scheme-item {
     display: flex;
     flex-direction: column;
+    width: 100%;
+    max-width: 288px;
+}
+
+.about-project__scheme-item:last-of-type {
+    max-width: 912px;
 }
 
 .about-project__scheme-indicator{
@@ -63,13 +69,10 @@
 }
 
 .about-project__scheme-indicator_green {
-    width: 288px;
     background-color: #2BE080;;
 }
 
 .about-project__scheme-indicator_grey {
-    max-width: 912px;
-    width: 100%;
     background-color: #F2F2F2;
 }
 

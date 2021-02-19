@@ -1,4 +1,8 @@
 .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
     background-color: #5C5C5C;
     max-width: 1280px;
     width: 100%;

@@ -1,0 +1,20 @@
+.not-found {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #FFFFFF;
+    width: 100%;
+    max-width: 1280px;
+    height: 100%;
+    font-family: Inter;
+    font-style: normal;
+}
+
+.not-found__title {    
+   font-weight: normal;
+   font-size: 140px;
+   line-height: 169px;
+   text-align: center;
+   color: #000000;
+}

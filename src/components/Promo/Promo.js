@@ -1,5 +1,6 @@
 import React from 'react';
 import './Promo.css';
+import NavTab from '../NavTab/NavTab';
 import gloube from '../../images/text__COLOR_landing-logo.svg';
 
 function Promo() {
@@ -16,7 +17,7 @@ function Promo() {
             </div>
             <img src={gloube} alt="глобус" className="promo__image"/>
         </div>        
-        <button className="promo__button">Узнать больше</button>
+        <NavTab />
     </section>
     )
 }
