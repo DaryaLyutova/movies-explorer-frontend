@@ -1,11 +1,15 @@
 import React from 'react';
 import './SavedMovies.css';
-/* import menLogo from '../../images/men-logo.svg'; */
-
+import SearchForm from '../SearchForm/SearchForm';
+import MoviesCardList from '../MoviesCardList/MoviesCardList';
+import moviesCards from '../../utils/moviesCards';
 
 function SavedMovies() {
     return(
-        <section className="saved-movies"></section>
+        <section className="saved-movies">
+            <SearchForm />
+            <MoviesCardList moviesCards={moviesCards} />
+        </section>
     )    
 }
 
