@@ -31,13 +31,13 @@ function Navigation(props) {
                 <li>
                     <Link
                         to="/movies"
-                        className="navigation__button navigation__button_boild button-defolt-style">
+                        className="navigation__button navigation__button_boild">
                         Фильмы</Link>
                 </li>
                 <li>
                     <Link
                         to="/saved-movies"
-                        className="navigation__button button-defolt-style">
+                        className="navigation__button">
                         Сохранённые фильмы</Link>
                 </li>
             </ul>

@@ -1,0 +1,30 @@
+.input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    color: #A0A0A0;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    margin: 0;
+}
+
+.input__zone {
+    width: 366px;
+    height: 16px;
+    border-radius: 8px;
+    border: none;
+    background-color: #F9F9F9;
+    margin: 10px 0;
+    padding: 15px;
+    color: #000000;
+}
+
+.input__span {
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+}

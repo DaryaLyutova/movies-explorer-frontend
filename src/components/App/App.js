@@ -9,39 +9,41 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
+import Preloader from '../../Preloader/Preloader';
+import moviesCards from '../../utils/moviesCards';
 
 function App() {
 
-  return (
-    <div className="app">
-      <Header />
-      <Switch>
-        <Route path="/signin">
-          <Login />
-        </Route>
-        <Route path="/signup">
-          <Register />
-        </Route>
-        <Route exact path="/">
-          <Main />
-          <Footer />
-        </Route>
-        <Route path="/movies">
-          <Movies />
-          <Footer />
-        </Route>
-        <Route path="/saved-movies">
-          <SavedMovies />
-          <Footer />
-        </Route>
-        <Route path="/profile"></Route>
-        <Route path="/*">
-          <PageNotFound />
-        </Route>
-      </Switch>
+    return (
+      <div className="app">
+        <Header />
+        <Switch>
+          <Route path="/signin">
+            <Login />
+          </Route>
+          <Route path="/signup">
+            <Register />
+          </Route>
+          <Route exact path="/">
+            <Main />
+            <Footer />
+          </Route>
+          <Route path="/movies">
+            <Movies moviesCards={moviesCards} />
+            <Footer />
+          </Route>
+          <Route path="/saved-movies">
+            <SavedMovies moviesCards={moviesCards} />
+            <Footer />
+          </Route>
+          <Route path="/profile"></Route>
+          <Route path="/*">
+            <PageNotFound />
+          </Route>
+        </Switch>
+        <Preloader />
+      </div>
+    );
+  }
 
-    </div>
-  );
-}
-
-export default App;
+  export default App;

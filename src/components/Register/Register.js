@@ -1,10 +1,23 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Register.css';
+import Input from '../Input/Input';
 
 function Register() {
-    return(
+    return (
         <section className="register">
-            <p className="register__subtitle">Hello world!</p>
+            <h1 className="register__title">Добро пожаловать!</h1>
+            <form className="register__form">
+                <Input name={'Имя'} />
+                <Input name={'Email'} />
+                <Input name={'Пароль'} />
+                <button type="submit"
+                    className="register__button">Зарегистрироваться</button>
+                <div className="register__link-block">
+                    <p className="register_subtitle">Уже зарегистрированы?</p>
+                    <Link to="signin" className="register__link">Войти</Link>
+                </div>
+            </form>
         </section>
     )
 }
