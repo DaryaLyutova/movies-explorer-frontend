@@ -10,7 +10,9 @@ function Navigation(props) {
     const location = useLocation();
 
     function handelHeaderTitle() {
-        if (location.pathname === '/movies' ||  location.pathname === '/saved-movies') {
+        if (location.pathname === '/movies' 
+        ||  location.pathname === '/saved-movies'
+        || location.pathname === '/profile') {
             isComponentVisible(false)
         } else {
             if (location.pathname === '/') {
