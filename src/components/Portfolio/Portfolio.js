@@ -7,15 +7,15 @@ function Portfolio() {
         <section className="portfolio">
             <h2 className="portfolio__title">Портфолио</h2>
             <nav className="portfolio__nav">
-                <a href="https://github.com/DaryaLyutova" className="portfolio__link">
+                <a href="https://github.com/DaryaLyutova/russian-travel" target="_blank" className="portfolio__link">
                     <p className="portfolio__link-subtitle">Статичный сайт</p>
                     <img src={vector} alt="указатель" className="portfolio__link-image" />
                 </a>
-                <a href="https://github.com/DaryaLyutova" className="portfolio__link">
+                <a href="https://github.com/DaryaLyutova/mesto" target="_blank" className="portfolio__link">
                     <p className="portfolio__link-subtitle">Адаптивный сайт</p>
                     <img src={vector} alt="указатель" className="portfolio__link-image" />
                 </a>
-                <a href="https://github.com/DaryaLyutova" className="portfolio__link">
+                <a href="https://github.com/DaryaLyutova/turbina-dd" target="_blank" className="portfolio__link">
                     <p className="portfolio__link-subtitle">Одностраничное приложение</p>
                     <img src={vector} alt="указатель" className="portfolio__link-image" />
                 </a>

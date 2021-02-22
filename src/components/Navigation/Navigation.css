@@ -34,6 +34,11 @@
     text-decoration: none;
 }
 
+.navigation__button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 .navigation__button_boild {
     font-weight: 500;
     margin-right: 16px;
@@ -53,6 +58,11 @@
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 40px;
     text-decoration: none;
+}
+
+.navigation__button-accaunt:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .navigation__button-accaunt-circle{
@@ -87,6 +97,11 @@
     text-decoration: none;
 }
 
+.navigation__signin:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 .navigation__signup {
     height: 32px;
     display: flex;
@@ -95,6 +110,11 @@
     text-align: right;
     color: #FFFFFF;
     text-decoration: none;
+}
+
+.navigation__signup:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }
 
 /* меняем при авторизации */

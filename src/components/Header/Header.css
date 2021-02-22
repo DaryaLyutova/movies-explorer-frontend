@@ -8,14 +8,15 @@
 }
 
 .header__square {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     margin: 18px 70px;
     background-color: #2BE080;
-    height: 38px;
-    width: 38px;
+    padding: 8px;
     border-radius: 10px;
+}
+
+.header__square:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .header__circle {

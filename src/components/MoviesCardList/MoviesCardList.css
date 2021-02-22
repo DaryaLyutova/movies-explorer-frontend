@@ -41,6 +41,11 @@
     margin: 61px 0 89px;
 }
 
+.movies-cardlist__button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 .movies-cardlist__button_visible {
     visibility: hidden;
 }

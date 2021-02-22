@@ -17,8 +17,8 @@ function AboutMe() {
                         кодить и поняла, что это именно то, чем я хочу заниматься.
                 </p>
                     <nav className="aboutMe__links">
-                        <a href="https://github.com/DaryaLyutova" className="aboutMe__link">Facebook</a>
-                        <a href="https://github.com/DaryaLyutova" className="aboutMe__link">Github</a>
+                        <a href="https://github.com/DaryaLyutova" target="_blank" className="aboutMe__link">Facebook</a>
+                        <a href="https://github.com/DaryaLyutova" target="_blank" className="aboutMe__link">Github</a>
                     </nav>
                 </div>
                 <img src={myPhoto} alt="моя фотография" className="aboutMe__photo" />

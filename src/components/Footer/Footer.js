@@ -27,9 +27,9 @@ function Footer() {
             <div className="footer__info">
                 <p className="footer__date">&copy; 2021</p>
                 <nav className="footer__nav">
-                    <a href="https://praktikum.yandex.ru/" className="footer__link">Яндекс.Практикум</a>
-                    <a href="https://github.com/DaryaLyutova" className="footer__link">Github</a>
-                    <a href="https://github.com/DaryaLyutova" className="footer__link">Facebook</a>
+                    <a href="https://praktikum.yandex.ru/" target="_blank" className="footer__link">Яндекс.Практикум</a>
+                    <a href="https://github.com/DaryaLyutova" target="_blank" className="footer__link">Github</a>
+                    <a href="https://github.com/DaryaLyutova" target="_blank" className="footer__link">Facebook</a>
                 </nav>
             </div>
         </footer>

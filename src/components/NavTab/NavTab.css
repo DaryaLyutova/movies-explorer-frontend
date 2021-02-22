@@ -1,4 +1,4 @@
-.promo__button {
+.nav-tab__button {
     outline: none;
     padding: 0;
     margin: 0 0 75px 70px;
@@ -17,4 +17,9 @@
     line-height: 16px;
     border-radius: 3px;
     text-decoration: none;
+}
+
+.nav-tab__button:hover {
+    cursor: pointer;
+    opacity: 0.8;
 }

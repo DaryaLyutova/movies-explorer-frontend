@@ -45,6 +45,11 @@
     color: #FFFFFF;
 }
 
+.register__button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 .register__link-block {
     display: flex;
     flex-direction: row;
@@ -64,4 +69,9 @@
 .register__link {
     color: #2BE080;
     margin: 0 0 0 6px;
+}
+
+.register__link:hover {
+    cursor: pointer;
+    opacity: 0.7;
 }

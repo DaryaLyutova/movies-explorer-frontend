@@ -48,6 +48,11 @@
     margin-left: 46px;
 }
 
+.seach-form__button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 .search-form__checkbox{
     vertical-align: middle;
     appearance: none;
