@@ -13,7 +13,7 @@ function Login() {
                 <button type="submit"
                     className="login__button">Войти</button>
                 <div className="login__link-block">
-                    <p className="login_subtitle">Ещё не зарегистрированы?</p>
+                    <p className="login__subtitle">Ещё не зарегистрированы?</p>
                     <Link to="signin" className="login__link">Зарегистрироваться</Link>
                 </div>
             </form>

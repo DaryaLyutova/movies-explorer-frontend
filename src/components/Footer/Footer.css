@@ -6,6 +6,10 @@
     flex-direction: column;
 }
 
+.footer_visible {
+    display: none;
+}
+
 .footer__title {
     font-family: Inter;
     font-style: normal;

@@ -30,15 +30,12 @@ function App() {
         </Route>
         <Route exact path="/">
           <Main />
-          <Footer />
         </Route>
         <Route path="/movies">
           <Movies moviesCards={moviesCards} />
-          <Footer />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies moviesCards={moviesCards} />
-          <Footer />
         </Route>
         <Route path="/profile">
           <Profile user={user} />
@@ -48,6 +45,7 @@ function App() {
         </Route>
       </Switch>
       <Preloader />
+      <Footer />
     </div>
   );
 }

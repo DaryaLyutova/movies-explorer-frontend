@@ -1,8 +1,8 @@
 import React from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
-import Logo from '../Logo/Logo';
+import smile from '../../images/logo__COLOR_main-1.svg';
 
 function Header() {
 
@@ -30,13 +30,14 @@ function Header() {
                     visible: true
                 })
             } if (location.pathname === '/signin'
-            || location.pathname === '/signup') {
-            isHeaderType({
-                color: '#FFFFFF',
-                display: 'flex',
-                visible: false
-            })
-        }
+                || location.pathname === '/signup') {
+                isHeaderType({
+                    color: '#FFFFFF',
+                    display: 'flex',
+                    visible: false
+                })
+
+            }
         }
     }
 
@@ -45,11 +46,21 @@ function Header() {
     }, [location.pathname])
 
     return (
-        <header className="header" 
-        style={{ backgroundColor: headerType.color, display: headerType.display}}>
-            <Logo />
+        <header className="header"
+            style={{
+                backgroundColor: headerType.color,
+                display: headerType.display,
+                maxWidth: !headerType.visible ? '396px' : ''
+            }}>
+            <Link
+                to="/"
+                className="header__square"
+                style={{ margin: !headerType.visible ? '70px 0 40px 0' : '18px 0 18px 70px' }}>
+                <div className="header__circle">
+                    <img src={smile} alt="логотип" className="header__smile" />
+                </div>
+            </Link>
             <Navigation visible={headerType.visible} />
-
         </header>
     )
 }

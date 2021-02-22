@@ -7,7 +7,10 @@ function SavedMovies({ moviesCards }) {
     return (
         <section className="saved-movies">
             <SearchForm />
-            <MoviesCardList moviesCards={moviesCards} buttonClass={'movies-card__delete'}/>
+            <MoviesCardList 
+            moviesCards={moviesCards} 
+            buttonClass={'movies-card__delete'}
+            visible={'movies-cardlist__button_visible'} />
         </section>
     )
 }
