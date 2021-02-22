@@ -3,7 +3,7 @@ import './Promo.css';
 import NavTab from '../NavTab/NavTab';
 import gloube from '../../images/text__COLOR_landing-logo.svg';
 
-function Promo() {
+function Promo(props) {
     return (
     <section className="promo">
         <div className="promo__container">
@@ -17,7 +17,7 @@ function Promo() {
             </div>
             <img src={gloube} alt="глобус" className="promo__image"/>
         </div>        
-        <NavTab />
+        <NavTab ancor={props.ancor}/>
     </section>
     )
 }

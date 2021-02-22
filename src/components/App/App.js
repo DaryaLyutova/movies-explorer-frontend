@@ -1,6 +1,7 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch, } from 'react-router-dom';
+// import { Link, animateScroll as scroll } from "react-scroll";
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';

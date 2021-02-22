@@ -9,8 +9,8 @@ import Portfolio from '../Portfolio/Portfolio';
 function Main() {
     return(
         <main className="main">
-            <Promo />
-            <AboutProject />
+            <Promo ancor={'section1'} />
+            <AboutProject id={'section1'}/>
             <Techs />
             <AboutMe />
             <Portfolio />

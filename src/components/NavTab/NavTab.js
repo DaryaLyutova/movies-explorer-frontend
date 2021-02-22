@@ -1,9 +1,10 @@
 import React from 'react';
+import { Link } from "react-scroll";
 import './NavTab.css';
 
-function NavTab() {
+function NavTab(props) {
     return(
-<a href='#about-project' className="nav-tab__button">Узнать больше</a>
+<Link  to={props.ancor} smooth={true} className="nav-tab__button">Узнать больше</Link>
     )
 }
 

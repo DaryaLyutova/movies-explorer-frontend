@@ -1,14 +1,12 @@
 import React from 'react';
-import ScrollableAnchor from 'react-scrollable-anchor'
+
 import './AboutProject.css';
 import PageTitle from '../PageTitle/PageTitle';
 
-function AboutProject() {
+function AboutProject(props) {
     return (
-        <section className="about-project">
-            <ScrollableAnchor id={'#about-project'}>
-            <PageTitle title={'O проекте'} />
-            </ScrollableAnchor>            
+        <section id={props.id} className="about-project">
+            <PageTitle title={'O проекте'} />       
             <ul className="about-project__items">
                 <li className="about-project__item">
                     <h3 className="about-project__title">Дипломный проект включал 5 этапов</h3>
