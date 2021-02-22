@@ -7,7 +7,7 @@ function Movies(props) {
     return(
         <section className="movies">
             <SearchForm />
-            <MoviesCardList moviesCards={props.moviesCards} />
+            <MoviesCardList moviesCards={props.moviesCards} buttonClass={'movies-card__save'} />
         </section>
     )    
 }

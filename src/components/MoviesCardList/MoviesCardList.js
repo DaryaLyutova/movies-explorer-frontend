@@ -9,6 +9,7 @@ function MoviesCardList(props) {
             props.moviesCards.slice(0, 12).map((moviesCard) =>
             (<MoviesCard
                 moviesCard={moviesCard}
+                buttonClass={props.buttonClass}
             />)
             )
         }        

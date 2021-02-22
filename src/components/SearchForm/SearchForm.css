@@ -37,11 +37,10 @@
 
 .seach-form__button {
     appearance: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 55px;
+    text-align: center;
+    width: 34px;
     height: 34px;
+    padding: 11px 15px;
     background-size: cover;
     background-color: #2BE080;
     border-radius: 50px;
@@ -71,11 +70,12 @@
     margin: 27px 30px 27px 0;
 }
 
-.search-form__line-horizontal {    
+.search-form__line-horizontal {
     border-bottom: 1px solid #E8E8E8;
-    margin: 70px 70px 10px 70px;
+    text-align: center;
     width: 100%;
     max-width: 1140px;
+    margin: 69px 0 10px 0;
 }
 
 .search-form__line-vertical {

@@ -10,9 +10,9 @@ function Navigation(props) {
     const location = useLocation();
 
     function handelHeaderTitle() {
-        if (location.pathname === '/movies' 
-        ||  location.pathname === '/saved-movies'
-        || location.pathname === '/profile') {
+        if (location.pathname === '/movies'
+            || location.pathname === '/saved-movies'
+            || location.pathname === '/profile') {
             isComponentVisible(false)
         } else {
             if (location.pathname === '/') {
@@ -26,10 +26,11 @@ function Navigation(props) {
     }, [location.pathname])
 
     return (
-        <nav 
-        className={`navigation ${!props.visible ? 'navigation__visible' : ''}`}
-        style={{ justifyContent: componentVisible ? 'flex-end' : 'space-between'}}>
-            <ul className={`navigation__movies ${componentVisible ? 'navigation__visible' : ''}`}>
+        <nav
+            className={`navigation ${!props.visible ? 'navigation-none' : ''}`}
+            style={{ justifyContent: componentVisible ? 'flex-end' : 'space-between' }}>
+            <Link className="navigation__button navigation__button_visible">Главная</Link>
+            <ul className={`navigation__movies ${componentVisible ? 'navigation-none' : ''}`}>
                 <li>
                     <Link
                         to="/movies"
@@ -43,7 +44,8 @@ function Navigation(props) {
                         Сохранённые фильмы</Link>
                 </li>
             </ul>
-            <ul className={`navigation__user ${!componentVisible ? 'navigation__visible' : ''}`}>
+            <ul className={`navigation__user 
+            ${!componentVisible ? 'navigation-none' : ''}`}>
                 <li>
                     <Link
                         to="/signin"
@@ -58,9 +60,13 @@ function Navigation(props) {
                 </li>
             </ul>
             <Link
-                to="/profile" className={`navigation__button-accaunt ${componentVisible ? 'navigation__visible' : ''}`}>Аккаунт
+                to="/profile"
+                className={`navigation__button-accaunt 
+                ${componentVisible ? 'navigation-none' : ''}`}>
+                Аккаунт
             <div className="navigation__button-accaunt-circle">
-                    <img src={menLogo} alt="логотип аккаунта" className="navigation-logo" />
+                    <img src={menLogo} alt="логотип аккаунта"
+                        className="navigation-logo" />
                 </div>
             </Link>
         </nav >

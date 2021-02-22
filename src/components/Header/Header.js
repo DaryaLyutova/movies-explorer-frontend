@@ -1,14 +1,14 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import './Header.css';
 import Navigation from '../Navigation/Navigation';
-import smile from '../../images/logo__COLOR_main-1.svg';
+import Logo from '../Logo/Logo';
 
 function Header() {
 
     const [headerType, isHeaderType] = React.useState({
         color: '#5C5C5C',
-        display: 'flex',
+        display: 'none',
         navigation: true
     });
     const location = useLocation();
@@ -47,12 +47,7 @@ function Header() {
     return (
         <header className="header" 
         style={{ backgroundColor: headerType.color, display: headerType.display}}>
-            <Link
-                to="/" className="header__square">
-                <div className="header__circle">
-                    <img src={smile} alt="логотип" className="header__smile" />
-                </div>
-            </Link>
+            <Logo />
             <Navigation visible={headerType.visible} />
 
         </header>
