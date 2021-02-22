@@ -1,7 +1,6 @@
 import React from 'react';
 import './App.css';
 import { Route, Switch, } from 'react-router-dom';
-// import { Link, animateScroll as scroll } from "react-scroll";
 import Header from '../Header/Header';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
@@ -12,7 +11,6 @@ import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Preloader from '../../Preloader/Preloader';
 import Profile from '../Profile/Profile';
-
 import moviesCards from '../../utils/moviesCards';
 import user from '../../utils/user';
 

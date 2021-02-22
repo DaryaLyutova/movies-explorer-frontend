@@ -45,12 +45,17 @@
     border: none;
 }
 
-.profile__span {
+.profile__error {
+    width: 100%;
     font-weight: normal;
     font-size: 10px;
     line-height: 12px;
     color: #EE3465;
-    display: none;
+    text-align: center;
+}
+
+.profile__error_visile {
+    visibility: hidden;
 }
 
 .profile__line {
@@ -64,7 +69,7 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    margin: 204px 0 70px 0;
+    margin: 188px 0 70px 0;
     padding: 0;
     list-style-type: none;
 }
@@ -91,5 +96,13 @@
 
 .profile__button_color {
     font-weight: 500;
+    color: #EE3465;
+}
+
+.profile__button__disabled {
+    color: #C2C2C2;
+}
+
+.profile__input_error {
     color: #EE3465;
 }

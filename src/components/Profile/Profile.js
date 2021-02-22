@@ -7,26 +7,25 @@ function Profile({ user }) {
             <h1 className="profile__title">Привет, {user.name}!</h1>
             <form className="profile__form">
                 <label className="profile__label">Имя
-            <input className="profile__input" type="string" required />
+            <input className="profile__input profile__input_error" type="text" minlength="2" maxlength="30" required />
                 </label>
-                <span className="profile__span">Что-то пошло не так...</span>
+                <span className="profile__error">Что-то пошло не так...</span>
                 <div className="profile__line" />
                 <label className="profile__label">Email
             <input className="profile__input" type="Email" required />
                 </label>
-                <span className="profile__span">Что-то пошло не так...</span>
-                <ul className="profile__button-zone">
-                    <li>
-                        <button type="submit" className="profile__button">
+                <span className="profile__error">Что-то пошло не так...</span>
+                <div className="profile__button-zone">
+                        <span className="profile__error">
+                            Какя-то ошибка.
+                        </span>
+                        <button type="submit" className="profile__button profile__button__disabled">
                             Редактировать
-                            </button>
-                    </li>
-                    <li>
+                        </button>
                         <button className="profile__button profile__button_color">
                             Выйти из аккаунта
-                            </button>
-                    </li>
-                </ul>
+                        </button>
+                </div>
 
 
             </form>

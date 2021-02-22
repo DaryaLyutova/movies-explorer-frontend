@@ -4,14 +4,17 @@ import './Login.css';
 import Input from '../Input/Input';
 
 function Login() {
-    return(
+    return (
         <section className="login">
             <h1 className="login__title">Рады видеть!</h1>
             <form className="login__form">
-                <Input name={'Email'} />
-                <Input name={'Пароль'} />
+                <Input name={'Email'} type={'email'} />
+                <Input name={'Пароль'} type={'password'} minlength={'8'} />
+                <span className="login__button-error">
+                    Какя-то ошибка.
+                </span>
                 <button type="submit"
-                    className="login__button">Войти</button>
+                    className="login__button login__button_disabled">Войти</button>
                 <div className="login__link-block">
                     <p className="login__subtitle">Ещё не зарегистрированы?</p>
                     <Link to="signin" className="login__link">Зарегистрироваться</Link>

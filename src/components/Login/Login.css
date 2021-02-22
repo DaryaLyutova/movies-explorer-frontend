@@ -35,7 +35,7 @@
     border: none;
     outline: none;
     padding: 0;
-    margin: 179px 0 16px 0;
+    margin: 20px 0 16px 0;
     font: inherit;
     color: inherit;
     background-color: #2BE080;
@@ -76,4 +76,21 @@
 .login__link:hover {
     cursor: pointer;
     opacity: 0.7;
+}
+
+.login__button_disabled {
+    color: #C2C2C2;
+    background-color: #F8F8F8;
+}
+
+.login__button-error {
+    font-weight: normal;
+    font-size: 10px;
+    line-height: 12px;
+    color: #EE3465;
+    margin-top: 147px;
+}
+
+.login__button-error_visible {
+    visibility: hidden;
 }

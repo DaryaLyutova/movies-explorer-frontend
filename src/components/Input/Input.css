@@ -28,3 +28,7 @@
     line-height: 12px;
     color: #EE3465;
 }
+
+.input__zone_error {
+    color: #EE3465;
+}
