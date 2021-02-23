@@ -32,3 +32,9 @@
 .input__zone_error {
     color: #EE3465;
 }
+
+@media all and (max-width: 425px) {
+    .input__zone {
+        width: 230px;
+    }
+}

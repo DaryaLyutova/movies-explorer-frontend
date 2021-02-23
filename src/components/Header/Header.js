@@ -54,8 +54,8 @@ function Header() {
             }}>
             <Link
                 to="/"
-                className="header__square"
-                style={{ margin: !headerType.visible ? '70px 0 40px 0' : '18px 0 18px 70px' }}>
+                className={`header__square  ${!headerType.visible ? 'header__square_margin' : ''}`}>
+               
                 <div className="header__circle">
                     <img src={smile} alt="логотип" className="header__smile" />
                 </div>
