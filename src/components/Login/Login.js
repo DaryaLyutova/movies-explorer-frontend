@@ -6,10 +6,12 @@ import Input from '../Input/Input';
 function Login() {
     return (
         <section className="login">
-            <h1 className="login__title">Рады видеть!</h1>
             <form className="login__form">
-                <Input name={'Email'} type={'email'} />
-                <Input name={'Пароль'} type={'password'} minlength={'8'} />
+                <fieldset className="login__block">
+                    <h1 className="login__title">Рады видеть!</h1>
+                    <Input name={'Email'} type={'email'} />
+                    <Input name={'Пароль'} type={'password'} minlength={'8'} />
+                </fieldset>
                 <span className="login__button-error">
                     Какя-то ошибка.
                 </span>

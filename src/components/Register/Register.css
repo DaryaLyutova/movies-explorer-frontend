@@ -24,6 +24,16 @@
     justify-content: center;
 }
 
+.register__block {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
 .register__button {
     display: flex;
     align-items: center;
