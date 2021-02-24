@@ -65,6 +65,16 @@
     }
 }
 
+@media all and (max-width: 480px) {
+    .header__square {
+        margin: 18px 0 0 14px;
+    }
+
+    .header__popup-button {
+        margin: 15px 16px 0 0;
+    }
+}
+
 @media all and (max-width: 425px) {
     .header__square_margin {
         margin: 26px auto 30px auto;

@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* justify-content: center; */
     width: 100%;
     height: 100%;
     color: #000;
@@ -30,7 +29,7 @@
     align-items: center;
     justify-content: space-between;
     width: 410px;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 11px;
     line-height: 13px;
     color: #000000;
@@ -47,7 +46,7 @@
 
 .profile__error {
     width: 100%;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 10px;
     line-height: 12px;
     color: #EE3465;
@@ -80,7 +79,7 @@
     padding: 0;    
     font: inherit;
     background-color: inherit;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 13px;
     line-height: 16px;
     color: #000000;
@@ -105,4 +104,39 @@
 
 .profile__input_error {
     color: #EE3465;
+}
+
+@media all and (max-width: 880px) {    
+    .profile__title {
+        margin: 236px 0 96px 0;
+    }
+
+    .profile__button-zone {
+        margin: 210px 0 269px 0;
+    }
+}
+
+@media all and (max-width: 480px) {    
+    .profile__title {
+        margin: 70px 0 80px 0;
+    }
+    
+    .profile__label {
+        width: 260px;
+    }
+  
+    .profile__line {
+        width: 260px;
+    }
+    
+    .profile__button-zone {
+        margin: 379px 0 40px 0;
+    }
+    
+    .profile__button {
+        font-size: 12px;
+        line-height: 15px;
+        width: 300px;
+        height: 15px;
+    }
 }
