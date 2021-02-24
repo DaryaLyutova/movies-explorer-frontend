@@ -23,3 +23,9 @@
     cursor: pointer;
     opacity: 0.8;
 }
+
+@media all and (max-width: 880px) {
+    .nav-tab__button {
+        margin-left: 0;
+    }
+}

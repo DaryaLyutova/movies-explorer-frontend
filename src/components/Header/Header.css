@@ -41,8 +41,14 @@
     margin: 0 0 40px 0;
 }
 
+@media all and (max-width: 880px) {
+    .header__square {
+        margin-left: 50px;
+    }
+}
+
 @media all and (max-width: 425px) {
     .header__square_margin {
-        margin: 26px auto 50px auto;
+        margin: 26px auto 30px auto;
     }
 }

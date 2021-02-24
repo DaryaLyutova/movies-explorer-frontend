@@ -2,6 +2,8 @@
     display: flex;
     flex-direction: column;
     padding: 10px 70px 110px 70px;
+    font-family: Inter;
+    font-style: normal;
 }
 
 .about-project__items {
@@ -21,9 +23,7 @@
 }
 
 .about-project__title {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 20px;
     line-height: 24px;
     letter-spacing: -0.04em;
@@ -32,9 +32,7 @@
 }
 
 .about-project__subtitle {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 20px;
     color: #000000;
@@ -77,9 +75,7 @@
 }
 
 .about-project__time {
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
@@ -90,12 +86,34 @@
 }
 
 .about-project__type {
-    font-family: Suisse Intl;
-    font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
     color: #A0A0A0;
     margin: 14px 0 0;
+}
+
+@media all and (max-width: 880px) {
+    .about-project {
+        padding: 0 50px 90px 50px;
+    }
+    
+    .about-project__item:first-of-type {
+        padding-right: 30px;
+    }
+    
+    .about-project__title {
+
+        margin-bottom: 22px;
+    }
+    
+    .about-project__subtitle {
+        font-size: 12px;
+        line-height: 18px;
+    }
+    
+    .about-project__scheme {
+        padding-top: 93px;
+    }
 }

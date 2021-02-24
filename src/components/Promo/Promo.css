@@ -15,17 +15,17 @@
 .promo__text{
     display: flex;
     flex-direction: column;
+    font-family: Inter;
+    font-style: normal;
+    color: #ffff;
 }
 
 .promo__title {
     max-width: 640px;
-    color: #ffff;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
     font-size: 50px;
     line-height: 58px;
     margin: 0 0 36px 0;
+    font-weight: 400;
 }
 
 .promo__image {
@@ -38,11 +38,40 @@
 .promo__subtitle {
     margin: 0;
     max-width: 310px;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
     font-size: 13px;
     line-height: 16px;
-    color: #FFFFFF;
     opacity: 0.5;
+    font-weight: 400;
+}
+
+@media all and (max-width: 880px) {
+    .promo {
+        align-items: center;
+    }
+
+    .promo__container{
+        margin: 140px 0 92px 0;
+        flex-direction: column-reverse;
+        align-items: center;
+    }
+    
+    .promo__text{
+        align-items: center;
+        text-align: center;
+    }
+    
+    .promo__title {
+        max-width: 680px;
+        font-size: 40px;
+        line-height: 50px;
+        margin: 48px 0 22px 0;
+    }
+    
+    .promo__image {
+        margin: 0;
+    }
+    
+    .promo__subtitle {
+        max-width: 260px;
+    }
 }

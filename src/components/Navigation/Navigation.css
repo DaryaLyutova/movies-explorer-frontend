@@ -26,7 +26,7 @@
 }
 
 .navigation__button {
-    font-weight: normal;
+    font-weight: 400;
     font-size: 13px;
     line-height: 18px;
     text-align: right;
@@ -124,4 +124,10 @@
 
 .navigation-none {
     display: none;
+}
+
+@media all and (max-width: 880px) {
+    .navigation {
+        padding-right: 30px;
+    }
 }

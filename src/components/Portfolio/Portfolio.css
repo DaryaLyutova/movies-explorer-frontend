@@ -1,13 +1,13 @@
 .portfolio {
     display: flex;
     flex-direction: column;
-    padding: 100px 70px 50px 70px;
+    padding: 0 70px 125px 70px;
     font-family: Inter;
     font-style: normal;
 }
 
 .portfolio__title {    
-    font-weight: normal;
+    font-weight: 400;
     font-size: 18px;
     line-height: 20px;
     color: #A0A0A0;
@@ -37,11 +37,19 @@
 
 .portfolio__link-subtitle {
     margin: 0;
-    font-family: Inter;
-    font-style: normal;
-    font-weight: normal;
+    font-weight: 400;
     font-size: 30px;
     line-height: 50px;
     letter-spacing: -0.04em;
     color: #000000;
+}
+
+@media all and (max-width: 880px) {
+    .portfolio {
+        padding: 0 50px 90px 50px;
+    }
+
+    .portfolio__link-subtitle {
+        font-size: 28px;
+    }
 }

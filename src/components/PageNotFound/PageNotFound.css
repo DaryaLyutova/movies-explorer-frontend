@@ -12,7 +12,7 @@
 }
 
 .not-found__title {
-   font-weight: normal;
+   font-weight: 400;
    font-size: 140px;
    line-height: 169px;
    text-align: center;
@@ -21,7 +21,7 @@
 }
 
 .not-found__subtitle {
-    font-weight: normal;
+    font-weight: 400;
     font-size: 16px;
     line-height: 19px;
     text-align: center;
@@ -31,7 +31,7 @@
 }
 
 .not-found__button {
-    font-weight: normal;
+    font-weight: 400;
     font-size: 14px;
     line-height: 17px;
     text-align: center;
