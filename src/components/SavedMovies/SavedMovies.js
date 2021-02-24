@@ -6,7 +6,10 @@ import MoviesCardList from '../MoviesCardList/MoviesCardList';
 function SavedMovies({ moviesCards }) {
     return (
         <section className="saved-movies">
+            <div className="saved-movies__form-block">
             <SearchForm />
+            <div className="saved-movies__line" />
+            </div>   
             <MoviesCardList 
             moviesCards={moviesCards} 
             buttonClass={'movies-card__delete'}

@@ -60,6 +60,7 @@ function Header() {
                     <img src={smile} alt="логотип" className="header__smile" />
                 </div>
             </Link>
+            <button className="header__popup-button" />
             <Navigation visible={headerType.visible} />
         </header>
     )
