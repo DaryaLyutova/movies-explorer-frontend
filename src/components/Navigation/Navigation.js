@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import './Navigation.css';
 import menLogo from '../../images/men-logo.svg';
 
@@ -14,19 +14,22 @@ function Navigation(props) {
                 <button className="navigation__close navigation__button navigation__button_visible" />
                 <ul className="navigation__movies">
                     <li className="navigation__movies-item">
-                        <Link className="navigation__button navigation__button_visible">Главная</Link>
+                        <NavLink exact to="/"
+                        className="navigation__button navigation__button_visible"
+                            activeClassName="navigation__button_active">
+                            Главная</NavLink>
                     </li>
                     <li className="navigation__movies-item">
-                        <Link
-                            to="/movies"
-                            className="navigation__button navigation__button_boild">
-                            Фильмы</Link>
+                        <NavLink to="/movies"
+                            className="navigation__button navigation__button_boild"
+                            activeClassName="navigation__button_active">
+                            Фильмы</NavLink>
                     </li>
                     <li className="navigation__movies-item">
-                        <Link
-                            to="/saved-movies"
-                            className="navigation__button">
-                            Сохранённые фильмы</Link>
+                        <NavLink to="/saved-movies"
+                            className="navigation__button"
+                            activeClassName="navigation__button_active">
+                            Сохранённые фильмы</NavLink>
                     </li>
                 </ul>
                 <Link to="/profile" className="navigation__button-accaunt" >

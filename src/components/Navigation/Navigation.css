@@ -167,6 +167,11 @@
     .navigation__button_visible {
         visibility: visible;
     }
+
+    .navigation__button_active {
+        width: 100%;
+        border-bottom: 2px solid;
+    }
 }
 
 @media all and (max-width: 480px) {
