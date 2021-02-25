@@ -116,7 +116,7 @@
     }
     
     .navigation__movies {
-        margin-top: 159px;
+        margin-top: 131px;
         display: flex;
         align-items: center;
         flex-direction: column;
@@ -169,3 +169,16 @@
     }
 }
 
+@media all and (max-width: 480px) {
+    .navigation__movies {
+        margin-top: 120px;
+    }
+
+    .navigation__movies-item {
+        margin-top: 24px;
+    }
+
+    .navigation__button-accaunt {
+        margin-bottom: 46px;
+    }
+}
