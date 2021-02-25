@@ -44,21 +44,6 @@ function Navigation(props) {
                         Сохранённые фильмы</Link>
                 </li>
             </ul>
-            <ul className={`navigation__user 
-            ${!componentVisible ? 'navigation-none' : ''}`}>
-                <li>
-                    <Link
-                        to="/signin"
-                        className="navigation__signup"
-                    >Регистрация</Link>
-                </li>
-                <li>
-                    <Link
-                        to="/signin"
-                        className="navigation__signin"
-                    >Войти</Link>
-                </li>
-            </ul>
             <Link
                 to="/profile"
                 className={`navigation__button-accaunt 

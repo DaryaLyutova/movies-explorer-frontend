@@ -102,7 +102,7 @@
     }
 }
 
-@media all and (max-width: 715px) {
+@media all and (max-width: 730px) {
     .movies-card__image {
         width: 311px;
         height: 174px;

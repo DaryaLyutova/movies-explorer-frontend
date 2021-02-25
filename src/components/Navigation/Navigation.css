@@ -16,15 +16,6 @@
     padding: 0;
 }
 
-.navigation__user {
-    display: flex;
-    flex-direction: row;
-    list-style-type: none;
-    padding: 0;
-    font-size: 12px;
-    line-height: 16px;
-}
-
 .navigation__button {
     font-weight: 400;
     font-size: 13px;
@@ -84,38 +75,7 @@
     margin: 0;
 }
 
-.navigation__signin {
-    width: 76px;
-    height: 32px;
-    border-radius: 3px;
-    background-color: #2BE080;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #000000;
-    margin-left: 30px;
-    text-decoration: none;
-}
 
-.navigation__signin:hover {
-    cursor: pointer;
-    opacity: 0.8;
-}
-
-.navigation__signup {
-    height: 32px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: right;
-    color: #FFFFFF;
-    text-decoration: none;
-}
-
-.navigation__signup:hover {
-    cursor: pointer;
-    opacity: 0.7;
-}
 
 /* меняем при авторизации */
 .navigation__button_visible {
