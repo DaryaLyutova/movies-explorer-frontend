@@ -2,8 +2,6 @@
     position: absolute;
     display: none;
     top: 0;
-    flex-direction: row;
-    align-items: center;
     width: 100%;
     max-width: 1280px;
     font-family: Inter;
@@ -11,19 +9,12 @@
     font-weight: 500;
 }
 
-.navigation__close {
-    margin-left: 70px;
-    background: url('../../images/delete.svg') no-repeat cover;
-    width: 22.5;
-    height: 22.5;
-}
-
-.navigation__movies {
+.navigation__container {
+    width: 100%;
     display: flex;
+    justify-content: space-between;    
     flex-direction: row;
-    list-style-type: none;
-    margin: 28px 0;
-    padding: 0;
+    align-items: center;
 }
 
 .navigation__button {
@@ -33,6 +24,17 @@
     text-align: right;
     color: #000000;
     text-decoration: none;
+    border: none;
+    padding: 0;
+    background-color: inherit;
+}
+
+.navigation__movies {
+    display: flex;
+    flex-direction: row;
+    list-style-type: none;
+    margin: 28px 0;
+    padding: 0;
 }
 
 .navigation__button:hover {
@@ -62,11 +64,6 @@
     text-decoration: none;
 }
 
-.navigation__button-accaunt:hover {
-    cursor: pointer;
-    opacity: 0.8;
-}
-
 .navigation__button-accaunt-circle{
     display: flex;
     flex-direction: row;
@@ -86,35 +83,49 @@
     margin: 0;
 }
 
-/* меняем при авторизации */
+.navigation__button-accaunt:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
 .navigation__button_visible {
     visibility: hidden;
 }
 
-.navigation-none {
+.navigation_none {
     display: flex;
 }
 
 @media all and (max-width: 880px) {
 
     .navigation {
-        z-index: 5;
+        z-index: 2;
+        justify-content: flex-end;
+        height: 100vh;
+        background: rgba(0, 0, 0, 0.3);;
+        background-size: cover;
+        font-weight: 500;
+    }
+
+    .navigation__container {
         flex-direction: column;
         align-items: center;
+        justify-content: space-between;
         width: 520px;
-        height: 100vh;
         background-color: #FFFF;
-        padding-top: 159px;
-        font-family: Inter;
-        font-style: normal;
-        font-weight: 500;
     }
     
     .navigation__movies {
+        margin-top: 159px;
         display: flex;
+        align-items: center;
         flex-direction: column;
         list-style-type: none;
-        padding: 0;
+        margin-top: 131px;
+    }
+
+    .navigation__movies-item {
+        margin-top: 28px;
     }
     
     .navigation__button {
@@ -122,24 +133,37 @@
         font-size: 18px;
         line-height: 22px;
         text-align: center;
+        
     }
-    
-    .navigation__button:hover {
-        cursor: pointer;
-        text-decoration: line-through;
+
+    .navigation__close {
+        background: url('../../images/delete.svg');
+        background-repeat: no-repeat;
+        background-size: cover;
+        width: 22.5px;
+        height: 22.5px;
+        position: absolute;
+        right: 23px;
+        top: 23px;
+        margin: 0;
+    }
+
+    .navigation__button-accaunt {
+        margin: 0 0 90px 0;
     }
     
     .navigation__button_boild {
         margin-right: 0;
     }
 
-    .navigation-none {
+    .navigation_none {
         display: none;
     }
+
     .navigation_open {
         display: flex;
     }
-    /* меняем при авторизации */
+
     .navigation__button_visible {
         visibility: visible;
     }
