@@ -116,4 +116,68 @@
     .about-project__scheme {
         padding-top: 93px;
     }
+    
+    .about-project__scheme-item {
+        max-width: 140px;
+    }
+
+}
+
+@media all and (max-width: 480px) {
+    .about-project {
+        padding: 0 18px 70px 18px;
+    }
+    
+    .about-project__items {
+        padding-top: 60px;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .about-project__item {
+        max-width: 284px;
+    }
+    
+    .about-project__item:first-of-type {
+        padding-right: 0;
+        padding-bottom: 56px;
+    }
+    
+    .about-project__title {
+        font-size: 18px;
+        line-height: 22px;
+        text-align: left;
+        margin-bottom: 16px;
+    }
+    
+    .about-project__subtitle {
+        text-align: left;
+        font-size: 11px;
+        line-height: 16px;
+    }
+    
+    .about-project__scheme {
+        padding-top: 60px;
+
+    }
+
+    .about-project__scheme-item {
+        max-width: 100px;
+    }
+
+    .about-project__scheme-indicator{
+        height: 35px;
+    }
+
+    
+    .about-project__time {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    
+    .about-project__type {
+        font-size: 11px;
+        line-height: 13px;
+        margin-top: 10px;
+    }
 }
