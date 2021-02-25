@@ -101,3 +101,31 @@
         height: 190px;
     }
 }
+
+@media all and (max-width: 715px) {
+    .movies-card__image {
+        width: 311px;
+        height: 174px;
+    }
+}
+
+@media all and (max-width: 670px) {
+    .movies-card__image {
+        width: 300px;
+        height: 168px;
+    }
+}
+
+@media all and (max-width: 635px) {
+    .movies-card__image {
+        width: 339px;
+        height: 190px;
+    }
+}
+
+@media all and (max-width: 400px) {
+    .movies-card__image {
+        width: 300px;
+        height: 168px;
+    }
+}

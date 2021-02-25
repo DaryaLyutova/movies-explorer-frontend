@@ -18,10 +18,20 @@
 
 @media all and (max-width: 880px) {
     .movies__form-block {
-        margin: 10px 0 70px 0;
+        margin: 80px 30px 70px 30px;
     }
     
     .movies__line {
         margin: 110px 30px 10px 30px;
+    }
+}
+
+@media all and (max-width: 500px) {
+    .movies__form-block {
+        margin: 80px 10px 40px 10px;
+    }
+    
+    .movies__line {
+        margin: 45px 10px 10px 10px;
     }
 }
