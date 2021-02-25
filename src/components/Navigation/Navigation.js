@@ -27,8 +27,10 @@ function Navigation(props) {
 
     return (
         <nav
-            className={`navigation ${!props.visible ? 'navigation-none' : ''}`}
+            className={`navigation ${!props.visible ? 'navigation-none' : ''} 
+            ${props.navOpen ? 'navigation_open' : ''}`}
             style={{ justifyContent: componentVisible ? 'flex-end' : 'space-between' }}>
+                <button className="navigation__close navigation__button navigation__button_visible" />
             <Link className="navigation__button navigation__button_visible">Главная</Link>
             <ul className={`navigation__movies ${componentVisible ? 'navigation-none' : ''}`}>
                 <li>

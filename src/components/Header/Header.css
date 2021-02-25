@@ -92,7 +92,7 @@
     opacity: 0.7;
 }
 
-.header__popup-button {
+.header__nav-button {
     background: url(../../images/nav-icon.svg) no-repeat;
     padding: 8px;
     width: 44px;
@@ -107,6 +107,11 @@
     text-align: start;
 }
 
+.header__nav-button:hover {
+    cursor: pointer;
+    opacity: 0.7;
+}
+
 @media all and (max-width: 880px) {
     .header__square {
         margin-left: 30px;
@@ -116,8 +121,11 @@
         margin-left: 0;
     }
 
-    .header__popup-button_display {
+    .header__nav-button_display {
         display: block;
+    }
+    .header__button-list {
+        margin-right:30px;
     }
 }
 
@@ -130,7 +138,7 @@
         margin-left: 0;
     }
 
-    .header__popup-button {
+    .header__nav-button {
         margin: 15px 16px 0 0;
     }
 }
@@ -138,5 +146,9 @@
 @media all and (max-width: 425px) {
     .header__square_margin {
         margin: 26px auto 30px auto;
+    }
+
+    .header__button-list {
+        margin: 24px 14px 0 0;
     }
 }

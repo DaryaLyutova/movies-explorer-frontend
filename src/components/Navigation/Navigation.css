@@ -1,18 +1,28 @@
 .navigation {
-    display: flex;
+    position: absolute;
+    display: none;
+    top: 0;
     flex-direction: row;
     align-items: center;
     width: 100%;
-    padding-right: 70px;
+    max-width: 1280px;
     font-family: Inter;
     font-style: normal;
     font-weight: 500;
+}
+
+.navigation__close {
+    margin-left: 70px;
+    background: url('../../images/delete.svg') no-repeat cover;
+    width: 22.5;
+    height: 22.5;
 }
 
 .navigation__movies {
     display: flex;
     flex-direction: row;
     list-style-type: none;
+    margin: 28px 0;
     padding: 0;
 }
 
@@ -37,6 +47,7 @@
 
 .navigation__button-accaunt {
     display: flex;
+    margin: 21px 70px 21px 0;
     flex-direction: row;
     align-items: center;
     justify-content: center;
@@ -75,19 +86,62 @@
     margin: 0;
 }
 
-
-
 /* меняем при авторизации */
 .navigation__button_visible {
     visibility: hidden;
 }
 
 .navigation-none {
-    display: none;
+    display: flex;
 }
 
 @media all and (max-width: 880px) {
+
     .navigation {
+        z-index: 5;
+        flex-direction: column;
+        align-items: center;
+        width: 520px;
+        height: 100vh;
+        background-color: #FFFF;
+        padding-top: 159px;
+        font-family: Inter;
+        font-style: normal;
+        font-weight: 500;
+    }
+    
+    .navigation__movies {
+        display: flex;
+        flex-direction: column;
+        list-style-type: none;
+        padding: 0;
+    }
+    
+    .navigation__button {
+        font-weight: 500;
+        font-size: 18px;
+        line-height: 22px;
+        text-align: center;
+    }
+    
+    .navigation__button:hover {
+        cursor: pointer;
+        text-decoration: line-through;
+    }
+    
+    .navigation__button_boild {
+        margin-right: 0;
+    }
+
+    .navigation-none {
         display: none;
     }
+    .navigation_open {
+        display: flex;
+    }
+    /* меняем при авторизации */
+    .navigation__button_visible {
+        visibility: visible;
+    }
 }
+

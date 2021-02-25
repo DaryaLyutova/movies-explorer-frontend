@@ -1,7 +1,8 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, } from 'react-router-dom';
+import { Route, Switch, useLocation } from 'react-router-dom';
 import Header from '../Header/Header';
+import Navigation from '../Navigation/Navigation';
 import Main from '../Main/Main';
 import Footer from '../Footer/Footer';
 import Movies from '../Movies/Movies';
@@ -16,10 +17,30 @@ import user from '../../utils/user';
 
 
 function App() {
+  const location = useLocation();
+  const [isNavVisible, setIsNavVisible] = React.useState(false);
+  const [isNavOpen, setIsNavOpen] = React.useState(false);
+
+  function handaleNavVisible() {
+    if (location.pathname === '/movies'
+      || location.pathname === '/saved-movies'
+      || location.pathname === '/profile') {
+      setIsNavVisible(false);
+    } else { setIsNavVisible(true) };
+  }
+
+  React.useEffect(() => {
+    handaleNavVisible();
+  }, [location.pathname]);
+
+  function handaleNavOpen() {
+    setIsNavOpen(true);
+  };
 
   return (
     <div className="app">
-      <Header />
+      <Header visible={isNavVisible} onNavOpen={handaleNavOpen} />
+      <Navigation visible={isNavVisible} navOpen={isNavOpen} />
       <Switch>
         <Route path="/signin">
           <Login />
