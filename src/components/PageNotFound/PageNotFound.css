@@ -39,7 +39,7 @@
     text-decoration: none;
 }
 
-@media all and (max-width: 425x) {
+@media all and (max-width: 425px) {
     .not-found__title {
        font-size: 80px;
        line-height: 97px;

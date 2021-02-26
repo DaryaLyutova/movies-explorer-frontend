@@ -10,21 +10,21 @@ function Portfolio() {
                 <li>
                     <a href="https://github.com/DaryaLyutova/russian-travel" target="_blank" className="portfolio__link">
                         <p className="portfolio__link-subtitle">Статичный сайт</p>
-                        <img src={vector} alt="указатель" className="portfolio__link-image" />
+                        <p className="portfolio__target">&#129125;</p>
                     </a>
                     <div className="portfolio__line" />
                 </li>
                 <li>
                     <a href="https://github.com/DaryaLyutova/mesto" target="_blank" className="portfolio__link">
                         <p className="portfolio__link-subtitle">Адаптивный сайт</p>
-                        <img src={vector} alt="указатель" className="portfolio__link-image" />
+                        <p className="portfolio__target">&#129125;</p>
                     </a>
                     <div className="portfolio__line" />
                 </li>
                 <li>
                     <a href="https://github.com/DaryaLyutova/turbina-dd" target="_blank" className="portfolio__link">
                         <p className="portfolio__link-subtitle">Одностраничное приложение</p>
-                        <img src={vector} alt="указатель" className="portfolio__link-image" />
+                        <p className="portfolio__target">&#129125;</p>
                     </a>
                     <div className="portfolio__line" />
                 </li>

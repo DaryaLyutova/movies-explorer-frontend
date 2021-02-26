@@ -47,6 +47,15 @@
     margin-right: 16px;
 }
 
+.navigation__close {
+    background: url('../../images/delete.svg');
+    background-repeat: no-repeat;
+    background-size: cover;
+    width: 22.5px;
+    height: 22.5px;
+    margin: 0  0 0 90px;
+}
+
 .navigation__button-accaunt {
     display: flex;
     margin: 21px 70px 21px 0;

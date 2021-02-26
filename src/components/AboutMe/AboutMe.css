@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: column;
     padding: 10px 70px 100px 70px;
-    font-family: Inter;
+    font-family: "Inter", "Arial", "sans-serif";
     font-style: normal;
     color: #000000;
 }
@@ -11,15 +11,17 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
 }
 
 .aboutMe__info {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
 }
 
 .aboutMe__title {
+    text-align: start;
     font-weight: 400;
     font-size: 50px;
     line-height: 58px;
@@ -99,7 +101,7 @@
 
 @media all and (max-width: 520px) {
     .aboutMe {
-        padding: 70px 14px;
+        padding: 0 14px 70px 14px;
     }
     
     .aboutMe__description {
@@ -125,8 +127,6 @@
     }
     
     .aboutMe__links {
-        display: flex;
-        flex-direction: row;
         list-style-type: none;
         margin: 0;
     }
@@ -137,6 +137,7 @@
     }
     
     .aboutMe__photo {
+        margin-top: 60px;
         width: 292px;
         height: 352px;
     }

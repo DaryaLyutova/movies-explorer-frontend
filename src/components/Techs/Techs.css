@@ -62,7 +62,7 @@
 
 @media all and (max-width: 880px) {
     .techs {
-        padding: 0 50px 90px 50px;
+        padding: 0 50px 80px 50px;
     }
     
     .techs__title {
@@ -73,7 +73,7 @@
         max-width: 460px;
         font-size: 12px;
         line-height: 18px;
-        margin-bottom: 83px;
+        margin-bottom: 78px;
     }
     
     .techs__list {
@@ -92,6 +92,7 @@
 @media all and (max-width: 480px) {
     .techs {
         padding: 0 18px 70px 18px;
+        background-color: #FFFF;
     }
     
     .techs__title {
@@ -104,7 +105,7 @@
         max-width: 292px;
         font-size: 11px;
         line-height: 16px;
-        margin-bottom: 50px;
+        margin-bottom: 45px;
     }
     
     .techs__list {

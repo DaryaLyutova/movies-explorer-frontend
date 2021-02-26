@@ -7,7 +7,7 @@
 }
 
 .promo__container{
-    margin: 75px 0 35px 70px;
+    margin: 75px 0 0 70px;
     display: flex;
     justify-content: space-between;
 }
@@ -32,7 +32,7 @@
     width: 310px;
     height: 304px;
     margin-right: 70px;
-    margin-bottom: 94px;
+    margin-bottom: 84px;
 }
 
 .promo__subtitle {
@@ -85,6 +85,7 @@
         max-width: 300px;
         font-size: 30px;
         line-height: 38px;
+        letter-spacing: -0.04em;
         margin: 0 0 24px 0;
     }
     

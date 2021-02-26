@@ -9,14 +9,14 @@ function Profile({ user }) {
                 <label className="profile__label">Имя
             <input className="profile__input profile__input_error" type="text" minlength="2" maxlength="30" required />
                 </label>
-                <span className="profile__error">Что-то пошло не так...</span>
+                <span className="profile__error profile__error_visible">Что-то пошло не так...</span>
                 <div className="profile__line" />
-                <label className="profile__label">Email
+                <label className="profile__label">Почта
             <input className="profile__input" type="Email" required />
                 </label>
-                <span className="profile__error">Что-то пошло не так...</span>
+                <span className="profile__error profile__error_visible">Что-то пошло не так...</span>
                 <div className="profile__button-zone">
-                        <span className="profile__error">
+                        <span className="profile__error profile__error_visible">
                             Какя-то ошибка.
                         </span>
                         <button type="submit" className="profile__button profile__button__disabled">

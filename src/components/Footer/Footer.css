@@ -70,15 +70,15 @@
     }
 
     .footer__title {
-        padding: 79px 50px 20px 50px;
+        padding: 79px 30px 20px 30px;
     }
     
     .footer__line {
-        margin: 0 50px;
+        margin: 0 30px;
     }
     
     .footer__info {
-        margin: 20px 50px;
+        margin: 20px 30px;
     }
 }
 
