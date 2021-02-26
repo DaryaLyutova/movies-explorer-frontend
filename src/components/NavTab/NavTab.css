@@ -1,0 +1,37 @@
+.nav-tab__button {
+    outline: none;
+    padding: 0;
+    margin: 0 0 75px 70px;
+    background-color: transparent;
+    justify-content: center;
+    width: 129px;
+    height: 36px;
+    border: 1px solid rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    color: #FFFFFF;
+    font-family: Inter;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 16px;
+    border-radius: 3px;
+    text-decoration: none;
+}
+
+.nav-tab__button:hover {
+    cursor: pointer;
+    opacity: 0.8;
+}
+
+@media all and (max-width: 880px) {
+    .nav-tab__button {
+        margin-left: 0;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .nav-tab__button {
+        margin-bottom: 30px;
+    }    
+}
