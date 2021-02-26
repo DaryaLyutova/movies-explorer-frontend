@@ -37,10 +37,14 @@ function App() {
     setIsNavOpen(true);
   };
 
+  function handleNAvClose() {
+    setIsNavOpen(false);
+  }
+
   return (
     <div className="app">
       <Header visible={isNavVisible} onNavOpen={handaleNavOpen} />
-      <Navigation visible={isNavVisible} navOpen={isNavOpen} />
+      <Navigation visible={isNavVisible} navOpen={isNavOpen} navClose={handleNAvClose} />
       <Switch>
         <Route path="/signin">
           <Login />

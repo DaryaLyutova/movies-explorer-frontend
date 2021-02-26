@@ -11,7 +11,9 @@ function Navigation(props) {
             className={`navigation ${!props.visible ? 'navigation_none' : ''} 
             ${props.navOpen ? 'navigation_open' : ''}`} >
             <div className="navigation__container">
-                <button className="navigation__close navigation__button navigation__button_visible" />
+                <button 
+                className="navigation__close navigation__button navigation__button_visible"
+                onClick={props.navClose} />
                 <ul className="navigation__movies">
                     <li className="navigation__movies-item">
                         <NavLink exact to="/"

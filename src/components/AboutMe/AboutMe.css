@@ -58,7 +58,8 @@
     text-decoration: none;
     font-weight: 500;
     font-size: 14px;
-    line-height: 22px;
+    line-height: 16px;
+    color: #000;
 }
 
 .aboutMe__photo {
