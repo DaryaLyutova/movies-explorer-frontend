@@ -1,7 +1,3 @@
-<<<<<<< HEAD
-# movies-explorer-frontend
-=======
-lutowa.diploma.students.nomoredomains.monster
 # Movies-explorer-frontend
 
 Frontend дипломного проекта. Сверстаны все основные страницы:
@@ -17,4 +13,7 @@ Frontend дипломного проекта. Сверстаны все осно
 - клонировать репозиторий: `git clone https://github.com/DaryaLyutova/movies-explorer-frontend`
 - устанивить зависимости `git install`
 - запустить проект `npm start`
->>>>>>> r1remote/level-2
+
+### movies-explorer-frontend
+=======
+lutowa.diploma.students.nomoredomains.monster
