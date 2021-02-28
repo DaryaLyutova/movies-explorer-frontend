@@ -14,7 +14,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    font-family: Inter;
+    font-family: "Inter", "Arial", "sans-serif";
     font-style: normal;
     font-weight: 400;
     color: #000000;
@@ -38,6 +38,11 @@
     background-size: 34px 34px;
     padding-left: 63px;
     line-height: 16px;
+}
+
+.seach-form__input {
+    cursor: pointer;
+    opacity: 0.8;
 }
 
 .seach-form__button {
