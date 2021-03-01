@@ -14,12 +14,14 @@ import Preloader from '../../Preloader/Preloader';
 import Profile from '../Profile/Profile';
 import moviesCards from '../../utils/moviesCards';
 import user from '../../utils/user';
+import moviesApi from '../../utils/MoviesApi';
 
 
 function App() {
   const location = useLocation();
   const [isNavVisible, setIsNavVisible] = React.useState(false);
   const [isNavOpen, setIsNavOpen] = React.useState(false);
+  const [isGetMoviesCards, setIsGetMoviesCards] = React.useState([]);
 
   function handaleNavVisible() {
     if (location.pathname === '/movies'
@@ -41,6 +43,17 @@ function App() {
     setIsNavOpen(false);
   }
 
+  // функция загрузки данных о фильмах
+  function handleLoadignCards() {
+    console.log('hi');
+    moviesApi.getInitialCards().then((data) => {
+      console.log(data);
+      setIsGetMoviesCards(data);
+    }).catch((err) => {
+      alert(err);
+    })
+  }
+
   return (
     <div className="app">
       <Header visible={isNavVisible} onNavOpen={handaleNavOpen} />
@@ -56,7 +69,10 @@ function App() {
           <Main />
         </Route>
         <Route path="/movies">
-          <Movies moviesCards={moviesCards} />
+          <Movies
+            moviesCards={isGetMoviesCards}
+            onLoadignCards={handleLoadignCards} 
+            />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies moviesCards={moviesCards} />

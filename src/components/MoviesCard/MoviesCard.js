@@ -11,7 +11,7 @@ function MoviesCard(props) {
                 </div>
                 <button type="button" className={`movies-card__button ${props.buttonClass}`} />
             </div>
-            <img alt={`изображение ${props.moviesCard.nameRU}`} src={props.moviesCard.image}
+            <img alt={`изображение ${props.moviesCard.nameRU}`} src={`https://api.nomoreparties.co${props.moviesCard.image.url}`}
                 className="movies-card__image" />
         </div>
     )
