@@ -40,9 +40,13 @@
     line-height: 16px;
 }
 
-.seach-form__input {
+.seach-form__input:hover {
     cursor: pointer;
     opacity: 0.8;
+}
+
+.seach-form__input:focus {
+    color: #000000;
 }
 
 .seach-form__button {
