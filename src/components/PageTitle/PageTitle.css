@@ -1,0 +1,42 @@
+.page-title {
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    padding: 100px 0 0;
+    font-family: "Inter", "Arial", "sans-serif";
+    font-style: normal;
+}
+
+.page-title__title {
+    padding: 0 0 23px 0;
+    margin: 0;
+    font-weight: 400;
+    font-size: 22px;
+    line-height: 27px;
+    letter-spacing: -0.04em;
+    color: #000000;
+}
+
+.page-title__line {
+    color: rgba(0, 0, 0, 1);
+    border-bottom: 1px solid;
+    text-align: center;
+}
+
+@media all and (max-width: 880px) {
+    .page-title {
+        padding-top: 90px;
+    }
+}
+
+@media all and (max-width: 480px) {
+    .page-title {
+        padding-top: 70px;
+    }
+    
+    .page-title__title {
+        padding-bottom: 28px;
+        font-size: 18px;
+        line-height: 22px;
+    }
+}
