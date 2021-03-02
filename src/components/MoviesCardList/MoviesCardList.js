@@ -32,7 +32,11 @@ function MoviesCardList(props) {
                 )
             }
             </div>
-            <button className={`movies-cardlist__button ${props.visible}`}>Ещё</button>
+            <button
+                className={`movies-cardlist__button 
+                ${props.moviesCards.length >= 3 ? 'movies-cardlist__button_visible' : ''}`}
+                >Ещё
+            </button>
         </section>
     )
 }

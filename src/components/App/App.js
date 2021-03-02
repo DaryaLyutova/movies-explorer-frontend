@@ -20,7 +20,13 @@ function App() {
   const location = useLocation();
   const [isNavVisible, setIsNavVisible] = React.useState(false);
   const [isNavOpen, setIsNavOpen] = React.useState(false);
-  const [isGetMoviesCards, setIsGetMoviesCards] = React.useState([]);
+
+  let moviesList = [];
+  if (localStorage.getItem('moviesList')) {
+    moviesList = JSON.parse(localStorage.getItem('moviesList'));
+  }
+
+  const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
   const [isTurnOn, setIsTrunOn] = React.useState(false);
   const [isRrequestRes, setIsReqwestRes] = React.useState({
     text: '',
@@ -58,29 +64,36 @@ function App() {
       text: '',
       visible: false
     });
-    moviesApi.getInitialCards().then((data) => {
-      let someMovies = data.filter((item) => {
-        if (item.nameRU.includes(name)) {
-          return item;
-        }
-      });
-      setIsTrunOn(false);
-      return someMovies;
-    }).
-      then((someMovies) => {        
+    localStorage.removeItem('moviesList');
+    moviesApi.getInitialCards()
+      .then((data) => {
+        let someMovies = data.filter((item) => {
+          if (item.nameRU.includes(name)) {
+            return item;
+          }
+        });
+        setIsTrunOn(false);
+        return someMovies;
+      }).then((someMovies) => {
+        localStorage.setItem('moviesList', JSON.stringify(someMovies));
+        return someMovies;
+      })
+      .then((someMovies) => {
         if (someMovies.length === 0) {
           setIsReqwestRes({
             text: 'Ничего не найдено',
             visible: true
-          })
+          });
+          setIsGetMoviesCards(someMovies);
         } else {
           setIsGetMoviesCards(someMovies);
         }
-      }).catch((err) => {
+      })
+      .catch((err) => {
         setIsReqwestRes({
           text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
           visible: true
-        })
+        });
       })
   }
 

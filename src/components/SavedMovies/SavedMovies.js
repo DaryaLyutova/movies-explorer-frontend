@@ -13,7 +13,8 @@ function SavedMovies({ moviesCards }) {
             <MoviesCardList 
             moviesCards={moviesCards} 
             buttonClass={'movies-card__delete'}
-            visible={'movies-cardlist__button_visible'} />
+            // visible={'movies-cardlist__button_visible'} 
+            />
         </section>
     )
 }
