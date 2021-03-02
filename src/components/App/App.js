@@ -10,7 +10,6 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
-import Preloader from '../../Preloader/Preloader';
 import Profile from '../Profile/Profile';
 import moviesCards from '../../utils/moviesCards';
 import user from '../../utils/user';
@@ -22,6 +21,16 @@ function App() {
   const [isNavVisible, setIsNavVisible] = React.useState(false);
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState([]);
+  const [isTurnOn, setIsTrunOn] = React.useState(false);
+  const [isRrequestRes, setIsReqwestRes] = React.useState({
+    text: '',
+    visible: false
+  })
+
+  function handelPreloader() {
+    setIsTrunOn(!isTurnOn);
+  };
+
 
   function handaleNavVisible() {
     if (location.pathname === '/movies'
@@ -39,25 +48,49 @@ function App() {
     setIsNavOpen(true);
   };
 
-  function handleNAvClose() {
+  function handleNavClose() {
     setIsNavOpen(false);
   }
 
   // функция загрузки данных о фильмах
-  function handleLoadignCards() {
-    console.log('hi');
+  function handleLoadignCards(name) {
+    setIsReqwestRes({
+      text: '',
+      visible: false
+    });
     moviesApi.getInitialCards().then((data) => {
-      console.log(data);
-      setIsGetMoviesCards(data);
-    }).catch((err) => {
-      alert(err);
-    })
+      let someMovies = data.filter((item) => {
+        if (item.nameRU.includes(name)) {
+          return item;
+        }
+      });
+      setIsTrunOn(false);
+      return someMovies;
+    }).
+      then((someMovies) => {        
+        if (someMovies.length === 0) {
+          setIsReqwestRes({
+            text: 'Ничего не найдено',
+            visible: true
+          })
+        } else {
+          setIsGetMoviesCards(someMovies);
+        }
+      }).catch((err) => {
+        setIsReqwestRes({
+          text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+          visible: true
+        })
+      })
   }
 
   return (
     <div className="app">
       <Header visible={isNavVisible} onNavOpen={handaleNavOpen} />
-      <Navigation visible={isNavVisible} navOpen={isNavOpen} navClose={handleNAvClose} />
+      <Navigation
+        visible={isNavVisible}
+        navOpen={isNavOpen}
+        navClose={handleNavClose} />
       <Switch>
         <Route path="/signin">
           <Login />
@@ -71,8 +104,11 @@ function App() {
         <Route path="/movies">
           <Movies
             moviesCards={isGetMoviesCards}
-            onLoadignCards={handleLoadignCards} 
-            />
+            onLoadignCards={handleLoadignCards}
+            turnOn={isTurnOn}
+            preloaderOn={handelPreloader}
+            reqwestRes={isRrequestRes}
+          />
         </Route>
         <Route path="/saved-movies">
           <SavedMovies moviesCards={moviesCards} />
@@ -84,7 +120,6 @@ function App() {
           <PageNotFound />
         </Route>
       </Switch>
-      <Preloader />
       <Footer />
     </div>
   );
