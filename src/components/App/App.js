@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, useLocation } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import Main from '../Main/Main';
@@ -14,6 +14,7 @@ import Profile from '../Profile/Profile';
 import moviesCards from '../../utils/moviesCards';
 import user from '../../utils/user';
 import moviesApi from '../../utils/MoviesApi';
+import mainApi from '../../utils/MainApi';
 
 
 function App() {
@@ -29,6 +30,7 @@ function App() {
     moviesList = JSON.parse(localStorage.getItem('moviesList'));
   }
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
+  // const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([])
 
   // прелоадер
   const [isTurnOn, setIsTrunOn] = React.useState(false);
@@ -61,6 +63,16 @@ function App() {
 
   function handleNavClose() {
     setIsNavOpen(false);
+  }
+  const history = useHistory();
+  // функция регистрации
+  function registerUser(name, email, password, resetForm) {
+    mainApi.register(name, email, password).then(() => {
+        resetForm();
+        history.push('/signin');
+      }).catch((err) => {
+        alert(err);
+      });
   }
 
   // функция загрузки данных о фильмах
@@ -95,12 +107,43 @@ function App() {
         }
       })
       .catch((err) => {
+        console.log(err)
         setIsReqwestRes({
           text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
           visible: true
         });
       })
   }
+
+
+  // React.useEffect(() => {
+  //   mainApi.getSaveMovies().then((saveMoviesCards) => {
+  //     if (saveMoviesCards.length === 0) {
+  //       setIsReqwestRes({
+  //         text: 'Нет сохраненных фильмов',
+  //         visible: true
+  //       });
+  //       setIsSaveMoviesCard(saveMoviesCards);
+  //     } else {
+  //       setIsSaveMoviesCard(saveMoviesCards);
+  //     }
+  //   }).catch((err) => {
+  //     console.log(err)
+  //     setIsReqwestRes({
+  //       text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+  //       visible: true
+  //     });
+  //   })
+  // },[isSaveMoviesCard]);
+
+  // функция добавления фильмов в избранное
+  // function makeSaveMovie(moviesCard) {
+  //   mainApi.saveMovie(moviesCard).then((movie) => {
+  //     setIsSaveMoviesCard([movie, ...isSaveMoviesCard]);
+  //   }).catch((err) => {
+  //     console.log(err);
+  //   })
+  // }
 
   return (
     <div className="app">
@@ -114,7 +157,7 @@ function App() {
           <Login />
         </Route>
         <Route path="/signup">
-          <Register />
+          <Register onRegistration={registerUser} />
         </Route>
         <Route exact path="/">
           <Main />
@@ -126,10 +169,14 @@ function App() {
             turnOn={isTurnOn}
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
+          // onSaveMovie={makeSaveMovie}
           />
         </Route>
         <Route path="/saved-movies">
-          <SavedMovies moviesCards={moviesCards} />
+          <SavedMovies
+            moviesCards={moviesCards}
+          // reqwestRes={isRrequestRes}
+          />
         </Route>
         <Route path="/profile">
           <Profile user={user} />

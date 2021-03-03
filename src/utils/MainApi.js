@@ -1,77 +1,98 @@
 class MainApi {
-    constructor(options) {
-      this._url = options.url;
-      this._headers = options.headers;
-    }
-  
-    _showErrow(res) {
-      if (res.ok) {
-        return res.json();
-      }
-      // если ошибка, отклоняем промис
-      Promise.reject(new Error(`Ошибка: ${res.status}`));
-    }
-  
-    // getUserInfo() {
-    //   return fetch(`${this._url}/users/me`, {
-    //     method: 'GET',
-    //     headers: this._headers,
-    //   }).then((res) => this._showErrow(res));
-    // }
-  
-    // setUserInfo(data) {
-    //   return fetch(`${this._url}/users/me`, {
-    //     method: 'PATCH',
-    //     headers: this._headers,
-    //     body: JSON.stringify(data),
-    //   }).then((res) => this._showErrow(res));
-    // }
-  
-    // sethUserAvatar(data) {
-    //   return fetch(`${this._url}/users/me/avatar`, {
-    //     method: 'PATCH',
-    //     headers: this._headers,
-    //     body: JSON.stringify(data),
-    //   }).then((res) => this._showErrow(res));
-    // }
-  
-    // getInitialCards() {
-    //   return fetch(`${this._url}/cards`, {
-    //     method: 'GET',
-    //     headers: this._headers,
-    //   }).then((res) => this._showErrow(res));
-    // }
-  
-    // makeNewCard(data) {
-    //   return fetch(`${this._url}/cards`, {
-    //     method: 'POST',
-    //     headers: this._headers,
-    //     body: JSON.stringify(data),
-    //   }).then((res) => this._showErrow(res));
-    // }
-  
-    // deleteCard(id) {
-    //   return fetch(`${this._url}/cards/${id}`, {
-    //     method: 'DELETE',
-    //     headers: this._headers,
-    //   }).then((res) => this._showErrow(res));
-    // }
-  
-    // changeLikeCardStatus(id, like) {
-    //   return fetch(`${this._url}/cards/${id}/likes`, {
-    //     method: like ? 'DELETE' : 'PUT',
-    //     headers: this._headers,
-    //   }).then((res) => this._showErrow(res));
-    // }
+  constructor(options) {
+    this._url = options.url;
+    this._headers = options.headers;
   }
-  
-  //создание экземпляра класса
-  const mainApi = new MainApi({
-    url: 'http://api.lutowa.diploma.students.nomoredomains.monster',
-    headers: {
-      'Content-Type': 'application/json',
-      authorization: `Bearer ${localStorage.getItem('token')}`,
-    },
-  });
-  
-  export default mainApi;
+
+  _showErrow(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    // если ошибка, отклоняем промис
+    Promise.reject(new Error(`Ошибка: ${res.status}`));
+  }
+
+  getSaveMovies() {
+    return fetch(`${this._url}/movies`, {
+      method: 'GET',
+      headers: this._headers,
+    }).then((res) => this._showErrow(res));
+  }
+
+  saveMovie(data) {
+    return fetch(`${this._url}/movies`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify(data),
+    }).then((res) => this._showErrow(res));
+  }
+
+  deleteMovie(id) {
+    return fetch(`${this._url}/movies/${id}`, {
+      method: 'DELETE',
+      headers: this._headers,
+    }).then((res) => this._showErrow(res));
+  }
+
+  // запрос на регистрацию пользователя
+  register(name, email, password) {
+    return fetch(`${this._url}/signup`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ name, email, password })
+    }).then((res) => this._showErrow(res));
+  };
+
+  // запрос на авторизацию пользователя
+  authorize(email, password) {
+    return fetch(`${this._url}/signin`, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ email, password })
+    })
+      .then((res) => { return res.json() })
+      .then((data) => {
+        if (data.token) {
+          // сохранение токена в localStorage
+          localStorage.setItem('token', data.token);
+          return data;
+        } else {
+          return;
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+
+  // запрос на поллучение токена 
+  getToken() {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      headers: this._headers,
+    })
+      .then((res) => { return res.json() })
+      .then(data => data)
+      .catch((err) => console.log(err));
+  }
+
+  // запрос пользователей
+  getUsers() {
+    return fetch(`${this._url}/users`, {
+      method: 'GET',
+      headers: this._headers,
+    })
+      .then((res) => { return res.json() })
+      .then(data => data)
+      .catch((err) => console.log(err));
+  }
+}
+
+//создание экземпляра класса
+const mainApi = new MainApi({
+  url: 'https://api.lutowa.diploma.students.nomoredomains.monster',
+  headers: {
+    'Content-Type': 'application/json',
+    // authorization: `Bearer ${localStorage.getItem('token')}`,
+  },
+});
+
+export default mainApi;

@@ -37,6 +37,7 @@ function MoviesCardList(props) {
                 (<MoviesCard
                     moviesCard={moviesCard}
                     buttonClass={props.buttonClass}
+                    onSaveMovie={props.onSaveMovie}
                 />)
                 )
             }

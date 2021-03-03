@@ -3,17 +3,21 @@ import './SavedMovies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 
-function SavedMovies({ moviesCards }) {
+function SavedMovies(props) {
     return (
         <section className="saved-movies">
             <div className="saved-movies__form-block">
             <SearchForm />
             <div className="saved-movies__line" />
-            </div>   
+            </div>
+            {/* <p className={`saved-movies__request-res 
+            ${!props.reqwestRes.visible ? 'saved-movies__request-res_visible' : ''}`} 
+            >
+                {props.reqwestRes.text}
+            </p> */}
             <MoviesCardList 
-            moviesCards={moviesCards} 
+            moviesCards={props.moviesCards} 
             buttonClass={'movies-card__delete'}
-            // visible={'movies-cardlist__button_visible'} 
             />
         </section>
     )
