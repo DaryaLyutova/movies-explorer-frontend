@@ -8,18 +8,27 @@ function MoviesCardList(props) {
     const whidth = document.documentElement.clientWidth;
 
     function handleQuantity() {
-        if (whidth < 635) {
-            setQuantity(5);
-        } else {
-            if (whidth < 1100) {
-                setQuantity(8);
+        function whidthMonitor() {
+            if (whidth < 635) {
+                setQuantity(5);
+            } else {
+                if (whidth < 1010) {
+                    setQuantity(8);
+                } else {
+                    setQuantity(12);
+                }
             }
-        }
+        };
+        setTimeout(whidthMonitor, 1000);
     };
 
-    React.useEffect(() => {
-        handleQuantity();
-    }, [whidth])
+    function handelLoadCards() {
+        if (whidth < 1010) {
+            setQuantity(quantity + 2);
+        } else { setQuantity(quantity + 3) }
+    };
+
+    window.addEventListener('resize', handleQuantity, false);
 
     return (
         <section className="movies-cardlist">
@@ -34,8 +43,9 @@ function MoviesCardList(props) {
             </div>
             <button
                 className={`movies-cardlist__button 
-                ${props.moviesCards.length >= 3 ? 'movies-cardlist__button_visible' : ''}`}
-                >Ещё
+                ${(props.moviesCards.length > quantity && quantity >= 3) ? 'movies-cardlist__button_visible' : ''}`}
+                onClick={handelLoadCards}
+            >Ещё
             </button>
         </section>
     )

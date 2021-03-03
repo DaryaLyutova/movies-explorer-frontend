@@ -18,16 +18,21 @@ import moviesApi from '../../utils/MoviesApi';
 
 function App() {
   const location = useLocation();
+
+  // стайт переменные для навигации по сайту
   const [isNavVisible, setIsNavVisible] = React.useState(false);
   const [isNavOpen, setIsNavOpen] = React.useState(false);
 
+  // создаем переменную для локального хранилища и записываем в нее отобранные фильмы 
   let moviesList = [];
   if (localStorage.getItem('moviesList')) {
     moviesList = JSON.parse(localStorage.getItem('moviesList'));
   }
-
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
+
+  // прелоадер
   const [isTurnOn, setIsTrunOn] = React.useState(false);
+  // ответ при запросе фильмов
   const [isRrequestRes, setIsReqwestRes] = React.useState({
     text: '',
     visible: false
