@@ -15,23 +15,25 @@ import moviesCards from '../../utils/moviesCards';
 import user from '../../utils/user';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
+import ProtectedRoute from '../ProtectedRoute';
+import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
 function App() {
   const location = useLocation();
-
+  //данные пользователя
+  const [currentUser, setCurrentUser] = React.useState({});
   // стайт переменные для навигации по сайту
   const [isNavVisible, setIsNavVisible] = React.useState(false);
   const [isNavOpen, setIsNavOpen] = React.useState(false);
   const [loggedIn, setLoggedIn] = React.useState(false);
-
-  // создаем переменную для локального хранилища и записываем в нее отобранные фильмы 
+  // переменная для локального хранилища отобранных фильмов
   let moviesList = [];
   if (localStorage.getItem('moviesList')) {
     moviesList = JSON.parse(localStorage.getItem('moviesList'));
   }
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
   // const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([])
-console.log(isGetMoviesCards);
+  // console.log(isGetMoviesCards);
   // прелоадер
   const [isTurnOn, setIsTrunOn] = React.useState(false);
   // ответ при запросе фильмов
@@ -46,11 +48,9 @@ console.log(isGetMoviesCards);
 
 
   function handaleNavVisible() {
-    if (location.pathname === '/movies'
-      || location.pathname === '/saved-movies'
-      || location.pathname === '/profile') {
-      setIsNavVisible(false);
-    } else { setIsNavVisible(true) };
+    if (loggedIn) {
+      setIsNavVisible(true);
+    } else { setIsNavVisible(false) };
   }
 
   React.useEffect(() => {
@@ -66,57 +66,70 @@ console.log(isGetMoviesCards);
   }
   const history = useHistory();
 
-    // функция авторизации
-    function authorizeUser(email, password, message, resetForm) {
-      mainApi.authorize(email, password).then((data) => {
-        if (data) {
-          resetForm();
-          handeleLogin();
-          history.push('/');
-        } else {
-          alert(message);
-        }
-      }).catch((err) => {
-        alert(err);
-      });
-    }
-
   // функция регистрации
   function registerUser(name, email, password, resetForm) {
     mainApi.register(name, email, password).then(() => {
-        resetForm();
-        history.push('/signin');
-      }).catch((err) => {
-        alert(err);
-      });
+      resetForm();
+      history.push('/signin');
+    }).catch((err) => {
+      alert(err);
+    });
   }
 
-    // проверка токена и данные email 
-    function handeleLogin() {
-      const token = localStorage.getItem('token');
-      if (token !== null) {
-        mainApi.getToken(token)
-          .then((data) => {
-            if (data) {
-              setLoggedIn(true);
-              history.push('/movies');
-            }
-          }).catch((err) => {
-            console.log(err);
-            signOut();
-          })
-      } else signOut();
-    }
-    // сохранение токена для повторного входа
-    React.useEffect(() => {
-      handeleLogin();
-    }, [loggedIn]);
+  // проверка токена и данные email 
+  function handeleLogin() {
+    const token = localStorage.getItem('token');
+    if (token !== null) {
+      mainApi.getToken(token)
+        .then((data) => {
+          if (data) {
+            setLoggedIn(true);
+            history.push('/movies');
+          }
+        }).catch((err) => {
+          console.log(err);
+          signOut();
+        })
+    } else signOut();
+  }
+  // сохранение токена для повторного входа
+  React.useEffect(() => {
+    handeleLogin();
+  }, [loggedIn]);
+
+  //функция удаления токена
+  function signOut() {
+    localStorage.removeItem('token');
+    setLoggedIn(false);
+    history.push('/');
+  }
+
+  // запрос данных пользователя
+  function getUser() {
+    mainApi.getUserInfo()
+    .then((userData) => {
+      console.log(userData)
+      setCurrentUser(userData);
+    }).catch((err) => {
+      alert(err);
+    })
+  }
   
-    //функция удаления токена
-    function signOut() {
-      localStorage.removeItem('token');
-      history.push('/');
-    }
+  // функция авторизации
+  function authorizeUser(email, password, message, resetForm) {
+    mainApi.authorize(email, password).then((data) => {
+      if (data) {
+        resetForm();
+        handeleLogin();
+        getUser();
+        history.push('/');
+      } else {
+        alert(message);
+      }
+    }).catch((err) => {
+      alert(err);
+    });
+  }
 
   // функция загрузки данных о фильмах
   function handleLoadignCards(name) {
@@ -188,51 +201,55 @@ console.log(isGetMoviesCards);
   // }
 
   return (
-    <div className="app">
-      <Header visible={isNavVisible} onNavOpen={handaleNavOpen} />
-      <Navigation
-        visible={isNavVisible}
-        navOpen={isNavOpen}
-        navClose={handleNavClose} />
-      <Switch>
-        <Route path="/signin">
-          <Login 
-          onLogin={authorizeUser}/>
-        </Route>
-        <Route path="/signup">
-          <Register onRegistration={registerUser} />
-        </Route>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route path="/movies">
-          <Movies
+    <CurrentUserContext.Provider value={currentUser}>
+      <div className="app">
+        <Header visible={isNavVisible} onNavOpen={handaleNavOpen} />
+        <Navigation
+          visible={isNavVisible}
+          navOpen={isNavOpen}
+          navClose={handleNavClose} />
+        <Switch>
+          <Route path="/signin">
+            <Login
+              onLogin={authorizeUser} />
+          </Route>
+          <Route path="/signup">
+            <Register onRegistration={registerUser} />
+          </Route>
+          <Route exact path="/">
+            <Main />
+          </Route>
+          <ProtectedRoute path="/movies"
+            loggedIn={loggedIn}
+            component={Movies}
             moviesCards={isGetMoviesCards}
             onLoadignCards={handleLoadignCards}
             turnOn={isTurnOn}
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
-            // onSaveMovie={makeSaveMovie}
+          // onSaveMovie={makeSaveMovie} 
           />
-        </Route>
-        <Route path="/saved-movies">
-          <SavedMovies
+          <ProtectedRoute path="/saved-movies"
+            loggedIn={loggedIn}
+            component={SavedMovies}
             moviesCards={moviesCards}
           // reqwestRes={isRrequestRes}
           />
-        </Route>
-        <Route path="/profile">
-          <Profile user={user} signOut={signOut}/>
-        </Route>
-        <Route path="/*">
-          <PageNotFound />
-        </Route>
-        <Route>
-              {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
-            </Route>
-      </Switch>
-      <Footer />
-    </div>
+          <ProtectedRoute path="/profile"
+            loggedIn={loggedIn}
+            component={Profile}
+            user={user}
+            signOut={signOut} />
+          <Route path="/*">
+            <PageNotFound />
+          </Route>
+          <Route>
+            {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
+          </Route>
+        </Switch>
+        <Footer />
+      </div>
+    </CurrentUserContext.Provider>
   );
 }
 

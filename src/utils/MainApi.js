@@ -74,6 +74,14 @@ class MainApi {
       .catch((err) => console.log(err));
   }
 
+  // запрос пользователя
+  getUserInfo() {
+    return fetch(`${this._url}/users/me`, {
+      method: 'GET',
+      headers: this._headers,
+    }).then((res) => this._showErrow(res));
+  }
+
   // запрос пользователей
   getUsers() {
     return fetch(`${this._url}/users`, {
@@ -91,7 +99,7 @@ const mainApi = new MainApi({
   url: 'https://api.lutowa.diploma.students.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
-    // authorization: `Bearer ${localStorage.getItem('token')}`,
+    authorization: `Bearer ${localStorage.getItem('token')}`,
   },
 });
 

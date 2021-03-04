@@ -11,7 +11,6 @@ function Register(props) {
 
     function handelNameChange(e) {
         setName(e.target.value)
-        console.log(name)
     };
 
     function handelEmailChange(e) {
@@ -27,11 +26,10 @@ function Register(props) {
         setEmail('');
         setPassword('');
     }
-    console.log(name, email, password)
+
     function handelSubmit(e) {
         e.preventDefault();
         props.onRegistration(name, email, password, resetForm);
-        console.log(name, email, password)
     };
 
     return (
