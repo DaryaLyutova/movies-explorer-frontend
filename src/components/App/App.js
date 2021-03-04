@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Route, Switch, useLocation, useHistory } from 'react-router-dom';
+import { Route, Switch, useLocation, useHistory, Redirect, } from 'react-router-dom';
 import Header from '../Header/Header';
 import Navigation from '../Navigation/Navigation';
 import Main from '../Main/Main';
@@ -16,13 +16,13 @@ import user from '../../utils/user';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 
-
 function App() {
   const location = useLocation();
 
   // стайт переменные для навигации по сайту
   const [isNavVisible, setIsNavVisible] = React.useState(false);
   const [isNavOpen, setIsNavOpen] = React.useState(false);
+  const [loggedIn, setLoggedIn] = React.useState(false);
 
   // создаем переменную для локального хранилища и записываем в нее отобранные фильмы 
   let moviesList = [];
@@ -31,7 +31,7 @@ function App() {
   }
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
   // const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([])
-
+console.log(isGetMoviesCards);
   // прелоадер
   const [isTurnOn, setIsTrunOn] = React.useState(false);
   // ответ при запросе фильмов
@@ -65,6 +65,22 @@ function App() {
     setIsNavOpen(false);
   }
   const history = useHistory();
+
+    // функция авторизации
+    function authorizeUser(email, password, message, resetForm) {
+      mainApi.authorize(email, password).then((data) => {
+        if (data) {
+          resetForm();
+          handeleLogin();
+          history.push('/');
+        } else {
+          alert(message);
+        }
+      }).catch((err) => {
+        alert(err);
+      });
+    }
+
   // функция регистрации
   function registerUser(name, email, password, resetForm) {
     mainApi.register(name, email, password).then(() => {
@@ -74,6 +90,33 @@ function App() {
         alert(err);
       });
   }
+
+    // проверка токена и данные email 
+    function handeleLogin() {
+      const token = localStorage.getItem('token');
+      if (token !== null) {
+        mainApi.getToken(token)
+          .then((data) => {
+            if (data) {
+              setLoggedIn(true);
+              history.push('/movies');
+            }
+          }).catch((err) => {
+            console.log(err);
+            signOut();
+          })
+      } else signOut();
+    }
+    // сохранение токена для повторного входа
+    React.useEffect(() => {
+      handeleLogin();
+    }, [loggedIn]);
+  
+    //функция удаления токена
+    function signOut() {
+      localStorage.removeItem('token');
+      history.push('/');
+    }
 
   // функция загрузки данных о фильмах
   function handleLoadignCards(name) {
@@ -115,7 +158,6 @@ function App() {
       })
   }
 
-
   // React.useEffect(() => {
   //   mainApi.getSaveMovies().then((saveMoviesCards) => {
   //     if (saveMoviesCards.length === 0) {
@@ -123,7 +165,7 @@ function App() {
   //         text: 'Нет сохраненных фильмов',
   //         visible: true
   //       });
-  //       setIsSaveMoviesCard(saveMoviesCards);
+  //       setIsSaveMoviesCard([]);
   //     } else {
   //       setIsSaveMoviesCard(saveMoviesCards);
   //     }
@@ -136,10 +178,10 @@ function App() {
   //   })
   // },[isSaveMoviesCard]);
 
-  // функция добавления фильмов в избранное
+  // // функция добавления фильмов в избранное
   // function makeSaveMovie(moviesCard) {
   //   mainApi.saveMovie(moviesCard).then((movie) => {
-  //     setIsSaveMoviesCard([movie, ...isSaveMoviesCard]);
+  //     setIsSaveMoviesCard([...isSaveMoviesCard, movie]);
   //   }).catch((err) => {
   //     console.log(err);
   //   })
@@ -154,7 +196,8 @@ function App() {
         navClose={handleNavClose} />
       <Switch>
         <Route path="/signin">
-          <Login />
+          <Login 
+          onLogin={authorizeUser}/>
         </Route>
         <Route path="/signup">
           <Register onRegistration={registerUser} />
@@ -169,7 +212,7 @@ function App() {
             turnOn={isTurnOn}
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
-          // onSaveMovie={makeSaveMovie}
+            // onSaveMovie={makeSaveMovie}
           />
         </Route>
         <Route path="/saved-movies">
@@ -179,11 +222,14 @@ function App() {
           />
         </Route>
         <Route path="/profile">
-          <Profile user={user} />
+          <Profile user={user} signOut={signOut}/>
         </Route>
         <Route path="/*">
           <PageNotFound />
         </Route>
+        <Route>
+              {loggedIn ? <Redirect to="/movies" /> : <Redirect to="/" />}
+            </Route>
       </Switch>
       <Footer />
     </div>

@@ -79,7 +79,7 @@ function Header(props) {
             >
                 <li>
                     <Link
-                        to="/signiup"
+                        to="/signup"
                         className="header__button-signup"
                     >Регистрация</Link>
                 </li>
