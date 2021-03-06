@@ -19,7 +19,7 @@ function handelSaveMovieClick() {
                 className={`movies-card__button ${props.buttonClass}`}
                 onClick={handelSaveMovieClick} />
             </div>
-            <img alt={`изображение ${props.moviesCard.nameRU}`} src={`https://api.nomoreparties.co${props.moviesCard.image.url}`}
+            <img alt={`изображение ${props.moviesCard.nameRU}`} src={props.moviesCard.image}
                 className="movies-card__image" />
         </div>
     )

@@ -35,7 +35,7 @@ function MoviesCardList(props) {
             <div className="movies-cardlist__grid">{
                 props.moviesCards.slice(0, quantity).map((moviesCard) =>
                 (<MoviesCard
-                    key={moviesCard.id}
+                    key={moviesCard.movieId}
                     moviesCard={moviesCard}
                     buttonClass={props.buttonClass}
                     onSaveMovie={props.onSaveMovie}

@@ -11,8 +11,6 @@ import Login from '../Login/Login';
 import Register from '../Register/Register';
 import PageNotFound from '../PageNotFound/PageNotFound';
 import Profile from '../Profile/Profile';
-import moviesCards from '../../utils/moviesCards';
-import user from '../../utils/user';
 import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute';
@@ -32,8 +30,7 @@ function App() {
     moviesList = JSON.parse(localStorage.getItem('moviesList'));
   }
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
-  // const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([])
-  // console.log(isGetMoviesCards);
+  const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([]);
   // прелоадер
   const [isTurnOn, setIsTrunOn] = React.useState(false);
   // ответ при запросе фильмов
@@ -45,7 +42,6 @@ function App() {
   function handelPreloader() {
     setIsTrunOn(!isTurnOn);
   };
-
 
   function handaleNavVisible() {
     if (loggedIn) {
@@ -80,6 +76,7 @@ function App() {
   function handeleLogin() {
     const token = localStorage.getItem('token');
     if (token !== null) {
+      console.log(token)
       mainApi.getToken(token)
         .then((data) => {
           if (data) {
@@ -107,14 +104,13 @@ function App() {
   // запрос данных пользователя
   function getUser() {
     mainApi.getUserInfo()
-    .then((userData) => {
-      console.log(userData)
-      setCurrentUser(userData);
-    }).catch((err) => {
-      alert(err);
-    })
+      .then((userData) => {
+        setCurrentUser(userData);
+      }).catch((err) => {
+        alert(err);
+      })
   }
-  
+
   // функция авторизации
   function authorizeUser(email, password, message, resetForm) {
     mainApi.authorize(email, password).then((data) => {
@@ -142,24 +138,42 @@ function App() {
       .then((data) => {
         let someMovies = data.filter((item) => {
           if (item.nameRU.includes(name)) {
+
             return item;
           }
+
         });
         setIsTrunOn(false);
-        return someMovies;
-      }).then((someMovies) => {
-        localStorage.setItem('moviesList', JSON.stringify(someMovies));
-        return someMovies;
+        const movies = someMovies.map((item) => {
+          return item = {
+            country: item.country,
+            director: item.director,
+            duration: item.duration,
+            year: item.year,
+            description: item.description,
+            image: `https://api.nomoreparties.co${item.image.url}`,
+            trailer: item.trailerLink,
+            thumbnail: `https://api.nomoreparties.co${item.image.url}`,
+            nameRU: item.nameRU,
+            nameEN: item.nameEN,
+            movieId: item.id,
+          };
+        })
+        return movies;
       })
-      .then((someMovies) => {
-        if (someMovies.length === 0) {
+      .then((movies) => {
+        localStorage.setItem('moviesList', JSON.stringify(movies));
+        return movies;
+      })
+      .then((movies) => {
+        if (movies.length === 0) {
           setIsReqwestRes({
             text: 'Ничего не найдено',
             visible: true
           });
-          setIsGetMoviesCards(someMovies);
+          setIsGetMoviesCards(movies);
         } else {
-          setIsGetMoviesCards(someMovies);
+          setIsGetMoviesCards(movies);
         }
       })
       .catch((err) => {
@@ -191,14 +205,15 @@ function App() {
   //   })
   // },[isSaveMoviesCard]);
 
-  // // функция добавления фильмов в избранное
-  // function makeSaveMovie(moviesCard) {
-  //   mainApi.saveMovie(moviesCard).then((movie) => {
-  //     setIsSaveMoviesCard([...isSaveMoviesCard, movie]);
-  //   }).catch((err) => {
-  //     console.log(err);
-  //   })
-  // }
+  // функция добавления фильмов в избранное
+  function makeSaveMovie(moviesCard) {
+    mainApi.saveMovie(moviesCard)
+    .then((movie) => {
+      setIsSaveMoviesCard([movie, ...isSaveMoviesCard]);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
 
   return (
     <CurrentUserContext.Provider value={currentUser}>
@@ -227,18 +242,18 @@ function App() {
             turnOn={isTurnOn}
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
-          // onSaveMovie={makeSaveMovie} 
+            onSaveMovie={makeSaveMovie}
           />
           <ProtectedRoute path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
-            moviesCards={moviesCards}
+            moviesCards={isSaveMoviesCard}
           // reqwestRes={isRrequestRes}
           />
           <ProtectedRoute path="/profile"
             loggedIn={loggedIn}
             component={Profile}
-            user={user}
+            user={currentUser}
             signOut={signOut} />
           <Route path="/*">
             <PageNotFound />
