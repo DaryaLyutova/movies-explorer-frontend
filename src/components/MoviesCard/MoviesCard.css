@@ -68,7 +68,7 @@
     background: no-repeat center url('../../images/flag.svg') #F9F9F9;
 }
 
-.movies-card__save:active {
+.movies-card__save_color {
     background: no-repeat center url('../../images/flag-active.svg') #2BE080;
 }
 

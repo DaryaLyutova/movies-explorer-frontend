@@ -16,7 +16,7 @@ import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import { handelChooseMovie } from '../../utils/utils';
-import {okReqwestRes, badReqwestRes} from '../../utils/consts';
+import { okReqwestRes, badReqwestRes } from '../../utils/consts';
 
 function App() {
   const location = useLocation();
@@ -39,7 +39,8 @@ function App() {
   const [isRrequestRes, setIsReqwestRes] = React.useState({
     text: '',
     visible: false
-  })
+  });
+  const [saveColor, setSaveColor] = React.useState(false);
 
   function handelPreloader() {
     setIsTrunOn(!isTurnOn);
@@ -78,7 +79,6 @@ function App() {
   function handeleLogin() {
     const token = localStorage.getItem('token');
     if (token !== null) {
-      console.log(token)
       mainApi.getToken(token)
         .then((data) => {
           if (data) {
@@ -103,23 +103,13 @@ function App() {
     history.push('/');
   }
 
-  // запрос данных пользователя
-  function getUser() {
-    mainApi.getUserInfo()
-      .then((userData) => {
-        setCurrentUser(userData);
-      }).catch((err) => {
-        alert(err);
-      })
-  }
-
   // функция авторизации
   function authorizeUser(email, password, message, resetForm) {
     mainApi.authorize(email, password).then((data) => {
       if (data) {
         resetForm();
         handeleLogin();
-        getUser();
+        // getUser();
         history.push('/');
       } else {
         alert(message);
@@ -141,10 +131,10 @@ function App() {
         const movie = handelChooseMovie(data, name);
         setIsTrunOn(false);
         return movie;
-        })
-        .then((movies) => {
-          localStorage.setItem('moviesList', JSON.stringify(movies));
-          return movies;
+      })
+      .then((movies) => {
+        localStorage.setItem('moviesList', JSON.stringify(movies));
+        return movies;
       })
       .then((movies) => {
         if (movies.length === 0) {
@@ -166,25 +156,18 @@ function App() {
       })
   }
 
-  // React.useEffect(() => {
-  //   mainApi.getSaveMovies().then((saveMoviesCards) => {
-  //     if (saveMoviesCards.length === 0) {
-  //       setIsReqwestRes({
-  //         text: 'Нет сохраненных фильмов',
-  //         visible: true
-  //       });
-  //       setIsSaveMoviesCard([]);
-  //     } else {
-  //       setIsSaveMoviesCard(saveMoviesCards);
-  //     }
-  //   }).catch((err) => {
-  //     console.log(err)
-  //     setIsReqwestRes({
-  //       text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
-  //       visible: true
-  //     });
-  //   })
-  // },[isSaveMoviesCard]);
+  React.useEffect(() => {
+    if (localStorage.getItem('token') !== null) {
+      Promise.all([mainApi.getUserInfo(), mainApi.getSaveMovies()])
+        .then(([userData, saveMoviesCards]) => {
+          setCurrentUser(userData);
+          setIsSaveMoviesCard(saveMoviesCards);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, []);
 
   // функция добавления фильмов в избранное
   function makeSaveMovie(moviesCard) {
@@ -224,6 +207,7 @@ function App() {
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
             onSaveMovie={makeSaveMovie}
+            // color={saveColor}
           />
           <ProtectedRoute path="/saved-movies"
             loggedIn={loggedIn}

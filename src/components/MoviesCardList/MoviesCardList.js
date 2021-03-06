@@ -29,7 +29,6 @@ function MoviesCardList(props) {
     };
 
     window.addEventListener('resize', handleQuantity, false);
-
     return (
         <section className="movies-cardlist">
             <div className="movies-cardlist__grid">{
@@ -39,6 +38,7 @@ function MoviesCardList(props) {
                     moviesCard={moviesCard}
                     buttonClass={props.buttonClass}
                     onSaveMovie={props.onSaveMovie}
+                    color={props.color}
                 />)
                 )
             }

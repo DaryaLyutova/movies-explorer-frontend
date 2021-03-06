@@ -16,7 +16,7 @@ function handelSaveMovieClick() {
                 </div>
                 <button 
                 type="button" 
-                className={`movies-card__button ${props.buttonClass}`}
+                className={`movies-card__button ${props.buttonClass} ${props.color ? 'movies-card__save_color' : ''}`}
                 onClick={handelSaveMovieClick} />
             </div>
             <img alt={`изображение ${props.moviesCard.nameRU}`} src={props.moviesCard.image}

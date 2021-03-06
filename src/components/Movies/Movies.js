@@ -25,7 +25,8 @@ function Movies(props) {
             <MoviesCardList
                 moviesCards={props.moviesCards}
                 buttonClass={'movies-card__save'}
-                onSaveMovie={props.onSaveMovie} />
+                onSaveMovie={props.onSaveMovie}
+                color={props.color} />
         </section>
     )
 }
