@@ -15,6 +15,8 @@ import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
+import { handelChooseMovie } from '../../utils/utils';
+import {okReqwestRes, badReqwestRes} from '../../utils/consts';
 
 function App() {
   const location = useLocation();
@@ -136,39 +138,18 @@ function App() {
     localStorage.removeItem('moviesList');
     moviesApi.getInitialCards()
       .then((data) => {
-        let someMovies = data.filter((item) => {
-          if (item.nameRU.includes(name)) {
-
-            return item;
-          }
-
-        });
+        const movie = handelChooseMovie(data, name);
         setIsTrunOn(false);
-        const movies = someMovies.map((item) => {
-          return item = {
-            country: item.country,
-            director: item.director,
-            duration: item.duration,
-            year: item.year,
-            description: item.description,
-            image: `https://api.nomoreparties.co${item.image.url}`,
-            trailer: item.trailerLink,
-            thumbnail: `https://api.nomoreparties.co${item.image.url}`,
-            nameRU: item.nameRU,
-            nameEN: item.nameEN,
-            movieId: item.id,
-          };
+        return movie;
         })
-        return movies;
-      })
-      .then((movies) => {
-        localStorage.setItem('moviesList', JSON.stringify(movies));
-        return movies;
+        .then((movies) => {
+          localStorage.setItem('moviesList', JSON.stringify(movies));
+          return movies;
       })
       .then((movies) => {
         if (movies.length === 0) {
           setIsReqwestRes({
-            text: 'Ничего не найдено',
+            text: okReqwestRes,
             visible: true
           });
           setIsGetMoviesCards(movies);
@@ -179,7 +160,7 @@ function App() {
       .catch((err) => {
         console.log(err)
         setIsReqwestRes({
-          text: 'Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз',
+          text: badReqwestRes,
           visible: true
         });
       })
@@ -208,11 +189,11 @@ function App() {
   // функция добавления фильмов в избранное
   function makeSaveMovie(moviesCard) {
     mainApi.saveMovie(moviesCard)
-    .then((movie) => {
-      setIsSaveMoviesCard([movie, ...isSaveMoviesCard]);
-    }).catch((err) => {
-      console.log(err);
-    })
+      .then((movie) => {
+        setIsSaveMoviesCard([movie, ...isSaveMoviesCard]);
+      }).catch((err) => {
+        console.log(err);
+      })
   }
 
   return (

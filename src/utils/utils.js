@@ -1,4 +1,4 @@
-const  handelChooseMovie = (data, name) => {
+export const handelChooseMovie = (data, name) => {
     let someMovies = data.filter((item) => {
         if (item.nameRU.includes(name)) {
             return item;
@@ -18,8 +18,8 @@ const  handelChooseMovie = (data, name) => {
           nameEN: item.nameEN,
           movieId: item.id,
         };
-      })
+      });
       return movies;
 };
 
-export default { handelChooseMovie };
+// export default { handelChooseMovie };
