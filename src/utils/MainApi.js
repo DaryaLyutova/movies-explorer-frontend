@@ -92,6 +92,15 @@ class MainApi {
       .then(data => data)
       .catch((err) => console.log(err));
   }
+
+  // изменение данных пользователя
+  setUserInfo(data) {
+    return fetch(`${this._url}/users/me`, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify(data),
+    }).then((res) => this._showErrow(res));
+  }
 }
 
 //создание экземпляра класса

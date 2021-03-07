@@ -119,6 +119,16 @@ function App() {
     });
   }
 
+  // функция обаботки данных о пользователе
+  function handleUpdateUser(data) {    
+    mainApi.setUserInfo(data).then((dataInfo) => {
+      setCurrentUser(dataInfo);
+      history.push('/movies');
+    }).catch((err) => {
+      alert(err);
+    })
+  }
+
   // функция загрузки данных о фильмах
   function handleLoadignCards(name) {
     setIsReqwestRes({
@@ -207,7 +217,7 @@ function App() {
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
             onSaveMovie={makeSaveMovie}
-            // color={saveColor}
+          // color={saveColor}
           />
           <ProtectedRoute path="/saved-movies"
             loggedIn={loggedIn}
@@ -219,7 +229,8 @@ function App() {
             loggedIn={loggedIn}
             component={Profile}
             user={currentUser}
-            signOut={signOut} />
+            signOut={signOut}
+            onUpdateUser={handleUpdateUser} />
           <Route path="/*">
             <PageNotFound />
           </Route>
