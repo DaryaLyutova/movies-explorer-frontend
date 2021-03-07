@@ -15,7 +15,7 @@ import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { handelChooseMovie } from '../../utils/utils';
+import { handelSelectMovie, handelSelect } from '../../utils/utils';
 import { okReqwestRes, badReqwestRes } from '../../utils/consts';
 
 function App() {
@@ -120,7 +120,7 @@ function App() {
   }
 
   // функция обаботки данных о пользователе
-  function handleUpdateUser(data) {    
+  function handleUpdateUser(data) {
     mainApi.setUserInfo(data).then((dataInfo) => {
       setCurrentUser(dataInfo);
       history.push('/movies');
@@ -130,7 +130,8 @@ function App() {
   }
 
   // функция загрузки данных о фильмах
-  function handleLoadignCards(name) {
+  function handleLoadignMovies(name) {
+    handelPreloader();
     setIsReqwestRes({
       text: '',
       visible: false
@@ -138,7 +139,7 @@ function App() {
     localStorage.removeItem('moviesList');
     moviesApi.getInitialCards()
       .then((data) => {
-        const movie = handelChooseMovie(data, name);
+        const movie = handelSelectMovie(data, name);
         setIsTrunOn(false);
         return movie;
       })
@@ -189,6 +190,20 @@ function App() {
       })
   }
 
+  // обработчик поиска по соханенным фильмам
+  function handleSaveMovieSelect(name) {
+    const movies = handelSelect(isSaveMoviesCard, name);
+    if (movies.length === 0) {
+      setIsReqwestRes({
+        text: okReqwestRes,
+        visible: true
+      });
+      setIsSaveMoviesCard(movies);
+    } else {
+      setIsSaveMoviesCard(movies);
+    }
+  }
+
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
@@ -212,7 +227,7 @@ function App() {
             loggedIn={loggedIn}
             component={Movies}
             moviesCards={isGetMoviesCards}
-            onLoadignCards={handleLoadignCards}
+            onLoadignCards={handleLoadignMovies}
             turnOn={isTurnOn}
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
@@ -223,7 +238,8 @@ function App() {
             loggedIn={loggedIn}
             component={SavedMovies}
             moviesCards={isSaveMoviesCard}
-          // reqwestRes={isRrequestRes}
+            onLoadignCards={handleSaveMovieSelect}
+            reqwestRes={isRrequestRes}
           />
           <ProtectedRoute path="/profile"
             loggedIn={loggedIn}

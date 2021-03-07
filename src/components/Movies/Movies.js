@@ -6,7 +6,6 @@ import Preloader from '../../Preloader/Preloader';
 
 function Movies(props) {
 
-
     return (
         <section className="movies">
             <div className="movies__form-block">

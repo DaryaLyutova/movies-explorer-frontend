@@ -11,7 +11,6 @@ function SearchForm(props) {
     function handelSubmitForm(event) {
         event.preventDefault();
         props.onLoadignCards(nameRef.current.value);
-        props.turnOn();
     }
 
     return (

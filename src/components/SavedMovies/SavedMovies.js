@@ -7,7 +7,7 @@ function SavedMovies(props) {
     return (
         <section className="saved-movies">
             <div className="saved-movies__form-block">
-            <SearchForm />
+            <SearchForm onLoadignCards={props.onLoadignCards}/>
             <div className="saved-movies__line" />
             </div>
             {/* <p className={`saved-movies__request-res 
