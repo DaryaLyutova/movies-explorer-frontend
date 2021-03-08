@@ -1,12 +1,8 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
-// import { filterDuration } from '../../utils/utils';
 
-function MoviesCardList(props) {
-    // const moviesCards = ( isFilter) => {
-    //     filterDuration(props.moviesCards , isFilter)
-    // }
+function MoviesCardList(props) {    
 
     const [quantity, setQuantity] = React.useState(12);
     const whidth = document.documentElement.clientWidth;

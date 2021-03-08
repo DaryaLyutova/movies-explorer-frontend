@@ -3,27 +3,31 @@ import './Movies.css';
 import SearchForm from '../SearchForm/SearchForm';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Preloader from '../../Preloader/Preloader';
-// import { filterDuration } from '../../utils/utils';
+import { filterDuration } from '../../utils/utils';
 
 function Movies(props) {
-    // const [isMovies, setIsMovies] = React.useState(props.moviesCards);
+    
+    const [isMovies, setIsMovies] = React.useState(props.moviesCards);
+    React.useEffect(() => {
+        setIsMovies(props.moviesCards);
+    }, [props.moviesCards]);
+    
+    function handelFilterDurationMovie(isFilter) {
+        if (isFilter) {
+            const selectedMovies = filterDuration(props.moviesCards);
+            setIsMovies(selectedMovies);
+        } else {
+            setIsMovies(props.moviesCards);
+        }
 
-    // function handelFilterDurationMovie(isFilter) {
-    //     if (isFilter) {
-    //         const selectedMovies = filterDuration(props.moviesCards);
-    //         setIsMovies(selectedMovies);
-    //     } else {
-    //         setIsMovies(props.moviesCards);
-    //     }
-
-    // }
+    }
 
     return (
         <section className="movies">
             <div className="movies__form-block">
                 <SearchForm
                     onLoadignCards={props.onLoadignCards}
-                    // handelFilterDurationMovie={handelFilterDurationMovie}
+                    handelFilterDurationMovie={handelFilterDurationMovie}
                     turnOn={props.preloaderOn}
                 />
                 <div className="movies__line" />
@@ -35,12 +39,11 @@ function Movies(props) {
                 {props.reqwestRes.text}
             </p>
             <MoviesCardList
-                moviesCards={props.moviesCards}
+                moviesCards={isMovies}
                 saveMoviesCards={props.saveMoviesCards}
                 buttonClass={'movies-card__save'}
                 onSaveMovie={props.onSaveMovie}
                 onDeleteMovie={props.onDeleteMovie}
-                color={props.color}
                 />
         </section>
     )

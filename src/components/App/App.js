@@ -184,7 +184,6 @@ function App() {
 
   // функция добавления фильмов в избранное
   function makeSaveMovie(moviesCard) {
-    console.log(moviesCard)
     mainApi.saveMovie(moviesCard)
       .then((movie) => {
         setIsSaveMoviesVisible([movie, ...isSaveMoviesVisible]);
