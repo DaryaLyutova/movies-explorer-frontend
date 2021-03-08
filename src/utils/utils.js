@@ -27,4 +27,13 @@ const handelSelectMovie = (data, name) => {
   return movies;
 };
 
-export { handelSelectMovie, handelSelect };
+const filterDuration = (data) => {
+  let someMovies = data.filter((item) => {
+    if (item.duration < 40) {
+      return item;
+    }
+  });
+  return someMovies;
+}
+
+export { handelSelectMovie, handelSelect, filterDuration };

@@ -28,7 +28,9 @@ function SearchForm(props) {
                 </button>
             </form>
             <div className="search-form__line" />
-            <FilterCheckbox />
+            <FilterCheckbox 
+            handelFilterDurationMovie={props.handelFilterDurationMovie}
+            />
         </div>
     )
 }

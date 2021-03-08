@@ -75,7 +75,7 @@ function Header(props) {
                 className={`header__nav-button ${props.visible ? 'header__nav-button_display' : ''}`}
                 onClick={props.onNavOpen} />
             <ul className={`header__button-list 
-            ${headerType.buttonVisible ? 'header__button-list_display' : ''}`}
+            ${(!props.visible && headerType.buttonVisible) ? 'header__button-list_display' : ''}`}
             >
                 <li>
                     <Link

@@ -33,6 +33,8 @@ function App() {
   }
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
   const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([]);
+  const [isSaveMoviesVisible, setIsSaveMoviesVisible] = React.useState([]);
+  // const [allMovies, setAllMovies] = React.useState([])
   // прелоадер
   const [isTurnOn, setIsTrunOn] = React.useState(false);
   // ответ при запросе фильмов
@@ -40,7 +42,6 @@ function App() {
     text: '',
     visible: false
   });
-  const [saveColor, setSaveColor] = React.useState(false);
 
   function handelPreloader() {
     setIsTrunOn(!isTurnOn);
@@ -109,7 +110,6 @@ function App() {
       if (data) {
         resetForm();
         handeleLogin();
-        // getUser();
         history.push('/');
       } else {
         alert(message);
@@ -139,6 +139,7 @@ function App() {
     localStorage.removeItem('moviesList');
     moviesApi.getInitialCards()
       .then((data) => {
+        // setAllMovies(data);
         const movie = handelSelectMovie(data, name);
         setIsTrunOn(false);
         return movie;
@@ -173,6 +174,7 @@ function App() {
         .then(([userData, saveMoviesCards]) => {
           setCurrentUser(userData);
           setIsSaveMoviesCard(saveMoviesCards);
+          setIsSaveMoviesVisible(saveMoviesCards);
         })
         .catch((err) => {
           console.log(err);
@@ -182,9 +184,24 @@ function App() {
 
   // функция добавления фильмов в избранное
   function makeSaveMovie(moviesCard) {
+    console.log(moviesCard)
     mainApi.saveMovie(moviesCard)
       .then((movie) => {
-        setIsSaveMoviesCard([movie, ...isSaveMoviesCard]);
+        setIsSaveMoviesVisible([movie, ...isSaveMoviesVisible]);
+      }).catch((err) => {
+        console.log(err);
+      })
+  }
+
+  function makeDeleteMovie(moviesCard) {
+    const movie = isSaveMoviesCard.find((movie) => movie.movieId === moviesCard.movieId);
+    mainApi.deleteMovie(movie._id)
+      .then(() => {
+        // // Формируем новый массив на основе имеющегося, удаляя из него карточку
+        const newMovies = isSaveMoviesVisible.filter((movie) => movie.movieId !== moviesCard.movieId);
+        // // Обновляем стейт
+        setIsSaveMoviesVisible(newMovies)
+
       }).catch((err) => {
         console.log(err);
       })
@@ -198,9 +215,9 @@ function App() {
         text: okReqwestRes,
         visible: true
       });
-      setIsSaveMoviesCard(movies);
+      setIsSaveMoviesVisible(movies);
     } else {
-      setIsSaveMoviesCard(movies);
+      setIsSaveMoviesVisible(movies);
     }
   }
 
@@ -232,14 +249,17 @@ function App() {
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
             onSaveMovie={makeSaveMovie}
-          // color={saveColor}
+            onDeleteMovie={makeDeleteMovie}
+            saveMoviesCards={isSaveMoviesCard}
           />
           <ProtectedRoute path="/saved-movies"
             loggedIn={loggedIn}
             component={SavedMovies}
-            moviesCards={isSaveMoviesCard}
+            moviesCards={isSaveMoviesVisible}
+            saveMoviesCards={isGetMoviesCards}
             onLoadignCards={handleSaveMovieSelect}
             reqwestRes={isRrequestRes}
+            onDeleteMovie={makeDeleteMovie}
           />
           <ProtectedRoute path="/profile"
             loggedIn={loggedIn}

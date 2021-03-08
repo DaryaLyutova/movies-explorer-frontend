@@ -1,8 +1,12 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+// import { filterDuration } from '../../utils/utils';
 
 function MoviesCardList(props) {
+    // const moviesCards = ( isFilter) => {
+    //     filterDuration(props.moviesCards , isFilter)
+    // }
 
     const [quantity, setQuantity] = React.useState(12);
     const whidth = document.documentElement.clientWidth;
@@ -29,6 +33,7 @@ function MoviesCardList(props) {
     };
 
     window.addEventListener('resize', handleQuantity, false);
+
     return (
         <section className="movies-cardlist">
             <div className="movies-cardlist__grid">{
@@ -38,7 +43,8 @@ function MoviesCardList(props) {
                     moviesCard={moviesCard}
                     buttonClass={props.buttonClass}
                     onSaveMovie={props.onSaveMovie}
-                    color={props.color}
+                    onDeleteMovie={props.onDeleteMovie}
+                    saveMoviesCards={props.saveMoviesCards}
                 />)
                 )
             }
