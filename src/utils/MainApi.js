@@ -35,20 +35,20 @@ class MainApi {
   }
 
   // запрос на регистрацию пользователя
-  register(name, email, password) {
+  register(data) {
     return fetch(`${this._url}/signup`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({ name, email, password })
+      body: JSON.stringify(data)
     }).then((res) => this._showErrow(res));
   };
 
   // запрос на авторизацию пользователя
-  authorize(email, password) {
+  authorize(data) {
     return fetch(`${this._url}/signin`, {
       method: 'POST',
       headers: this._headers,
-      body: JSON.stringify({ email, password })
+      body: JSON.stringify(data)
     })
       .then((res) => { return res.json() })
       .then((data) => {

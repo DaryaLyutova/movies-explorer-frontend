@@ -30,8 +30,11 @@ function MoviesCard(props) {
                     className={`movies-card__button ${props.buttonClass} ${isSave ? 'movies-card__save_color' : ''}`}
                     onClick={(!isSave && !isOwner) ? handelSaveMovieClick : handelDeleteMovieClick} />
             </div>
+            <a href={props.moviesCard.trailer} target="_blank" className="movies-card__link">
             <img alt={`изображение ${props.moviesCard.nameRU}`} src={props.moviesCard.image}
-                className="movies-card__image" />
+                className="movies-card__image" 
+                />
+            </a>            
         </div>
     )
 }

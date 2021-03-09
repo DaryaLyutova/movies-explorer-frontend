@@ -34,7 +34,6 @@ function App() {
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
   const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([]);
   const [isSaveMoviesVisible, setIsSaveMoviesVisible] = React.useState([]);
-  // const [allMovies, setAllMovies] = React.useState([])
   // прелоадер
   const [isTurnOn, setIsTrunOn] = React.useState(false);
   // ответ при запросе фильмов
@@ -66,13 +65,19 @@ function App() {
   }
   const history = useHistory();
 
+  const [signupMessege, setSignupMessege] = React.useState('');
   // функция регистрации
-  function registerUser(name, email, password, resetForm) {
-    mainApi.register(name, email, password).then(() => {
-      resetForm();
+  function registerUser(data) {
+    setSignupMessege('')
+    mainApi.register(data).then((data) => {
+      if(data){
       history.push('/signin');
+      } else {
+        setSignupMessege('Что-то пошло не так')
+      }
     }).catch((err) => {
-      alert(err);
+      setSignupMessege('Что-то пошло не так')
+      console.log(err);
     });
   }
 
@@ -83,6 +88,7 @@ function App() {
       mainApi.getToken(token)
         .then((data) => {
           if (data) {
+            setCurrentUser(data);
             setLoggedIn(true);
             history.push('/movies');
           }
@@ -100,32 +106,41 @@ function App() {
   //функция удаления токена
   function signOut() {
     localStorage.removeItem('token');
+    localStorage.removeItem('moviesList');
     setLoggedIn(false);
     history.push('/');
   }
-
+  const [loginMessege, setLoginMessege] = React.useState('');
   // функция авторизации
-  function authorizeUser(email, password, message, resetForm) {
-    mainApi.authorize(email, password).then((data) => {
+  function authorizeUser(data) {
+    setLoginMessege('');
+    mainApi.authorize(data).then((data) => {
       if (data) {
-        resetForm();
         handeleLogin();
+        setCurrentUser(data);
         history.push('/');
       } else {
-        alert(message);
+        setLoginMessege('Неверный логин или пароль')
       }
     }).catch((err) => {
-      alert(err);
+      setLoginMessege('Неверный логин или пароль')
+      console.log(err);
     });
   }
+const [updateUserMessege, setUpdateUserMessege] = React.useState('');
 
   // функция обаботки данных о пользователе
   function handleUpdateUser(data) {
     mainApi.setUserInfo(data).then((dataInfo) => {
+      if (data) {
       setCurrentUser(dataInfo);
-      history.push('/movies');
+      setUpdateUserMessege('Данные успешно редактированы');
+      } else {
+        setUpdateUserMessege('Произошла ошибка');
+      }
     }).catch((err) => {
-      alert(err);
+      setUpdateUserMessege('Произошла ошибка');
+      console.log(err);
     })
   }
 
@@ -139,7 +154,6 @@ function App() {
     localStorage.removeItem('moviesList');
     moviesApi.getInitialCards()
       .then((data) => {
-        // setAllMovies(data);
         const movie = handelSelectMovie(data, name);
         setIsTrunOn(false);
         return movie;
@@ -184,6 +198,7 @@ function App() {
 
   // функция добавления фильмов в избранное
   function makeSaveMovie(moviesCard) {
+    console.log(moviesCard)
     mainApi.saveMovie(moviesCard)
       .then((movie) => {
         setIsSaveMoviesVisible([movie, ...isSaveMoviesVisible]);
@@ -214,9 +229,9 @@ function App() {
         text: okReqwestRes,
         visible: true
       });
-      setIsSaveMoviesVisible(movies);
+      return setIsSaveMoviesVisible(movies);
     } else {
-      setIsSaveMoviesVisible(movies);
+      return setIsSaveMoviesVisible(movies);
     }
   }
 
@@ -231,10 +246,13 @@ function App() {
         <Switch>
           <Route path="/signin">
             <Login
-              onLogin={authorizeUser} />
+              onLogin={authorizeUser}
+              buttonMassege={loginMessege} />
           </Route>
           <Route path="/signup">
-            <Register onRegistration={registerUser} />
+            <Register 
+            onRegistration={registerUser}
+            buttonMassege={signupMessege} />
           </Route>
           <Route exact path="/">
             <Main />
@@ -263,9 +281,9 @@ function App() {
           <ProtectedRoute path="/profile"
             loggedIn={loggedIn}
             component={Profile}
-            user={currentUser}
             signOut={signOut}
-            onUpdateUser={handleUpdateUser} />
+            onUpdateUser={handleUpdateUser}
+            messege={updateUserMessege} />
           <Route path="/*">
             <PageNotFound />
           </Route>
