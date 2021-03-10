@@ -148,9 +148,11 @@ function App() {
 
   // функция обаботки данных о пользователе
   function handleUpdateUser(data) {
-    mainApi.setUserInfo(data).then((dataInfo) => {
-      if (data) {
-        setCurrentUser(dataInfo);
+    mainApi.setUserInfo(data)
+    .then((dataInfo) => {
+      if (dataInfo) {
+        console.log(dataInfo)
+        setCurrentUser(dataInfo.user);
         setUpdateUserMessege('Данные успешно редактированы');
       } else {
         setUpdateUserMessege('Произошла ошибка');

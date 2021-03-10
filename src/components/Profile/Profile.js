@@ -3,7 +3,7 @@ import './Profile.css';
 import cn from 'classnames';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 
-function Profile({ signOut, onUpdateUser, updateUserMessege }) {
+function Profile({ signOut, onUpdateUser, ...props }) {
 
     const currentUser = React.useContext(CurrentUserContext);
     //значения инпутов
@@ -117,10 +117,7 @@ function Profile({ signOut, onUpdateUser, updateUserMessege }) {
                     </span>
                 <div className="profile__button-zone">
                     <span className="profile__error profile__error_visible"
-                    // className={cn('profile__error', {'profile__error_visible': isValid })}
-                    >
-                        {updateUserMessege}
-                        </span>
+                    >{props.messege}</span>
                     <button 
                     type="submit" 
                     className={cn('profile__button', { 'profile__button_disabled': isValid})}
