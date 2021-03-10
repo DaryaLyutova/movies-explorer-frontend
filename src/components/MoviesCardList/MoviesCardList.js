@@ -2,7 +2,7 @@ import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
 
-function MoviesCardList(props) {    
+function MoviesCardList(props) {
 
     const [quantity, setQuantity] = React.useState(12);
     const whidth = document.documentElement.clientWidth;
@@ -39,7 +39,6 @@ function MoviesCardList(props) {
                     moviesCard={moviesCard}
                     buttonClass={props.buttonClass}
                     onSaveMovie={props.onSaveMovie}
-                    onDeleteMovie={props.onDeleteMovie}
                     saveMoviesCards={props.saveMoviesCards}
                 />)
                 )

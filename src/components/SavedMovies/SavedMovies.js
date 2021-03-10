@@ -9,17 +9,16 @@ function SavedMovies(props) {
     React.useEffect(() => {
         setIsMovies(props.moviesCards);
     }, [props.moviesCards]);
-    
+
     function handelFilterDurationMovie(isFilter) {
         if (isFilter) {
-            console.log(props.moviesCards)
             const selectedMovies = filterDuration(props.moviesCards);
             setIsMovies(selectedMovies);
         } else {
             setIsMovies(props.moviesCards);
         }
-        console.log(isMovies)    }
-    
+    }
+
     return (
         <section className="saved-movies">
             <div className="saved-movies__form-block">
@@ -37,9 +36,8 @@ function SavedMovies(props) {
             <MoviesCardList
                 saveMoviesCards={props.saveMoviesCards}
                 moviesCards={isMovies}
-                onDeleteMovie={props.onDeleteMovie}
+                onSaveMovie={props.onSaveMovie}
                 buttonClass={'movies-card__delete'}
-                handelFilterDurationMovie={props.handelFilterDurationMovie}
             />
         </section>
     )

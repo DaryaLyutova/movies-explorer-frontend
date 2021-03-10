@@ -20,6 +20,7 @@ import { okReqwestRes, badReqwestRes } from '../../utils/consts';
 
 function App() {
   const location = useLocation();
+  const history = useHistory();
   //данные пользователя
   const [currentUser, setCurrentUser] = React.useState({});
   // стайт переменные для навигации по сайту
@@ -34,13 +35,32 @@ function App() {
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
   const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([]);
   const [isSaveMoviesVisible, setIsSaveMoviesVisible] = React.useState([]);
-  // прелоадер
-  const [isTurnOn, setIsTrunOn] = React.useState(false);
+
   // ответ при запросе фильмов
   const [isRrequestRes, setIsReqwestRes] = React.useState({
     text: '',
     visible: false
   });
+  // прелоадер
+  const [isTurnOn, setIsTrunOn] = React.useState(false);
+  // сообщения при регистрации, авторизации и редактировании профиля
+  const [signupMessege, setSignupMessege] = React.useState('');
+  const [loginMessege, setLoginMessege] = React.useState('');
+  const [updateUserMessege, setUpdateUserMessege] = React.useState('');
+
+  React.useEffect(() => {
+    if (localStorage.getItem('token') !== null) {
+      Promise.all([mainApi.getUserInfo(), mainApi.getSaveMovies()])
+        .then(([userData, saveMoviesCards]) => {
+          setCurrentUser(userData);
+          setIsSaveMoviesCard(saveMoviesCards);
+          setIsSaveMoviesVisible(saveMoviesCards);
+        })
+        .catch((err) => {
+          console.log(err);
+        })
+    }
+  }, []);
 
   function handelPreloader() {
     setIsTrunOn(!isTurnOn);
@@ -63,15 +83,13 @@ function App() {
   function handleNavClose() {
     setIsNavOpen(false);
   }
-  const history = useHistory();
 
-  const [signupMessege, setSignupMessege] = React.useState('');
   // функция регистрации
   function registerUser(data) {
     setSignupMessege('')
     mainApi.register(data).then((data) => {
-      if(data){
-      history.push('/signin');
+      if (data) {
+        history.push('/signin');
       } else {
         setSignupMessege('Что-то пошло не так')
       }
@@ -110,7 +128,7 @@ function App() {
     setLoggedIn(false);
     history.push('/');
   }
-  const [loginMessege, setLoginMessege] = React.useState('');
+
   // функция авторизации
   function authorizeUser(data) {
     setLoginMessege('');
@@ -127,14 +145,13 @@ function App() {
       console.log(err);
     });
   }
-const [updateUserMessege, setUpdateUserMessege] = React.useState('');
 
   // функция обаботки данных о пользователе
   function handleUpdateUser(data) {
     mainApi.setUserInfo(data).then((dataInfo) => {
       if (data) {
-      setCurrentUser(dataInfo);
-      setUpdateUserMessege('Данные успешно редактированы');
+        setCurrentUser(dataInfo);
+        setUpdateUserMessege('Данные успешно редактированы');
       } else {
         setUpdateUserMessege('Произошла ошибка');
       }
@@ -182,43 +199,29 @@ const [updateUserMessege, setUpdateUserMessege] = React.useState('');
       })
   }
 
-  React.useEffect(() => {
-    if (localStorage.getItem('token') !== null) {
-      Promise.all([mainApi.getUserInfo(), mainApi.getSaveMovies()])
-        .then(([userData, saveMoviesCards]) => {
-          setCurrentUser(userData);
-          setIsSaveMoviesCard(saveMoviesCards);
-          setIsSaveMoviesVisible(saveMoviesCards);
+  // функция добавления фильмов в избранное
+  function makeSaveMovie(moviesCard) {
+    const movie = isSaveMoviesCard.find((movie) => movie.movieId === moviesCard.movieId);
+    if (!movie) {
+      mainApi.saveMovie(moviesCard)
+        .then((movie) => {
+          setIsSaveMoviesVisible(movie = [movie, ...isSaveMoviesVisible]);
+        }).catch((err) => {
+          console.log(err);
         })
-        .catch((err) => {
+    } else {
+      mainApi.deleteMovie(movie._id)
+        .then(() => {
+          // // Формируем новый массив на основе имеющегося, удаляя из него карточку
+          const newMovies = isSaveMoviesVisible.filter((movie) => movie.movieId !== moviesCard.movieId);
+          // // Обновляем стейт
+          const movies = setIsSaveMoviesVisible(newMovies);
+          return movies;
+
+        }).catch((err) => {
           console.log(err);
         })
     }
-  }, []);
-
-  // функция добавления фильмов в избранное
-  function makeSaveMovie(moviesCard) {
-    console.log(moviesCard)
-    mainApi.saveMovie(moviesCard)
-      .then((movie) => {
-        setIsSaveMoviesVisible([movie, ...isSaveMoviesVisible]);
-      }).catch((err) => {
-        console.log(err);
-      })
-  }
-
-  function makeDeleteMovie(moviesCard) {
-    const movie = isSaveMoviesCard.find((movie) => movie.movieId === moviesCard.movieId);
-    mainApi.deleteMovie(movie._id)
-      .then(() => {
-        // // Формируем новый массив на основе имеющегося, удаляя из него карточку
-        const newMovies = isSaveMoviesVisible.filter((movie) => movie.movieId !== moviesCard.movieId);
-        // // Обновляем стейт
-        setIsSaveMoviesVisible(newMovies)
-
-      }).catch((err) => {
-        console.log(err);
-      })
   }
 
   // обработчик поиска по соханенным фильмам
@@ -250,9 +253,9 @@ const [updateUserMessege, setUpdateUserMessege] = React.useState('');
               buttonMassege={loginMessege} />
           </Route>
           <Route path="/signup">
-            <Register 
-            onRegistration={registerUser}
-            buttonMassege={signupMessege} />
+            <Register
+              onRegistration={registerUser}
+              buttonMassege={signupMessege} />
           </Route>
           <Route exact path="/">
             <Main />
@@ -266,7 +269,6 @@ const [updateUserMessege, setUpdateUserMessege] = React.useState('');
             preloaderOn={handelPreloader}
             reqwestRes={isRrequestRes}
             onSaveMovie={makeSaveMovie}
-            onDeleteMovie={makeDeleteMovie}
             saveMoviesCards={isSaveMoviesCard}
           />
           <ProtectedRoute path="/saved-movies"
@@ -276,7 +278,7 @@ const [updateUserMessege, setUpdateUserMessege] = React.useState('');
             saveMoviesCards={isGetMoviesCards}
             onLoadignCards={handleSaveMovieSelect}
             reqwestRes={isRrequestRes}
-            onDeleteMovie={makeDeleteMovie}
+            onSaveMovie={makeSaveMovie}
           />
           <ProtectedRoute path="/profile"
             loggedIn={loggedIn}

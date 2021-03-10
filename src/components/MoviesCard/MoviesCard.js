@@ -5,17 +5,10 @@ function MoviesCard(props) {
 
     const isSaveDefault = props.saveMoviesCards.some(i => i.movieId === props.moviesCard.movieId);
     const [isSave, setIsSave] = React.useState(isSaveDefault);
-    
-    const isOwner = props.saveMoviesCards.some(i => i.owner);
-    
+
     function handelSaveMovieClick() {
         props.onSaveMovie(props.moviesCard);
-        setIsSave(true);
-    };
-
-    function handelDeleteMovieClick() {
-        props.onDeleteMovie(props.moviesCard);
-        setIsSave(false);
+        setIsSave(!isSave);
     };
 
     return (
@@ -28,13 +21,12 @@ function MoviesCard(props) {
                 <button
                     type="button"
                     className={`movies-card__button ${props.buttonClass} ${isSave ? 'movies-card__save_color' : ''}`}
-                    onClick={(!isSave && !isOwner) ? handelSaveMovieClick : handelDeleteMovieClick} />
+                    onClick={handelSaveMovieClick} />
             </div>
             <a href={props.moviesCard.trailer} target="_blank" className="movies-card__link">
-            <img alt={`изображение ${props.moviesCard.nameRU}`} src={props.moviesCard.image}
-                className="movies-card__image" 
-                />
-            </a>            
+                <img alt={`изображение ${props.moviesCard.nameRU}`} src={props.moviesCard.image}
+                    className="movies-card__image" />
+            </a>
         </div>
     )
 }

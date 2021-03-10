@@ -19,7 +19,6 @@ function Movies(props) {
         } else {
             setIsMovies(props.moviesCards);
         }
-
     }
 
     return (
@@ -43,7 +42,6 @@ function Movies(props) {
                 saveMoviesCards={props.saveMoviesCards}
                 buttonClass={'movies-card__save'}
                 onSaveMovie={props.onSaveMovie}
-                onDeleteMovie={props.onDeleteMovie}
                 />
         </section>
     )
