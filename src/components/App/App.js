@@ -15,8 +15,8 @@ import moviesApi from '../../utils/MoviesApi';
 import mainApi from '../../utils/MainApi';
 import ProtectedRoute from '../ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { handelSelectMovie, handelSelect } from '../../utils/utils';
-import { okReqwestRes, badReqwestRes } from '../../utils/consts';
+import { handlerSelectMovie, handlerSelect } from '../../utils/utils';
+import { OK_RES, BAD_RES } from '../../utils/consts';
 
 function App() {
   const location = useLocation();
@@ -62,25 +62,25 @@ function App() {
     }
   }, []);
 
-  function handelPreloader() {
+  function handlerPreloader() {
     setIsTrunOn(!isTurnOn);
   };
 
-  function handaleNavVisible() {
+  function handlerNavVisible() {
     if (loggedIn) {
       setIsNavVisible(true);
     } else { setIsNavVisible(false) };
   }
 
   React.useEffect(() => {
-    handaleNavVisible();
+    handlerNavVisible();
   }, [location.pathname]);
 
-  function handaleNavOpen() {
+  function handlerNavOpen() {
     setIsNavOpen(true);
   };
 
-  function handleNavClose() {
+  function handlerNavClose() {
     setIsNavOpen(false);
   }
 
@@ -100,7 +100,7 @@ function App() {
   }
 
   // проверка токена и данные email 
-  function handeleLogin() {
+  function handlerLogin() {
     const token = localStorage.getItem('token');
     if (token !== null) {
       mainApi.getToken(token)
@@ -118,7 +118,7 @@ function App() {
   }
   // сохранение токена для повторного входа
   React.useEffect(() => {
-    handeleLogin();
+    handlerLogin();
   }, [loggedIn]);
 
   //функция удаления токена
@@ -134,7 +134,7 @@ function App() {
     setLoginMessege('');
     mainApi.authorize(data).then((data) => {
       if (data) {
-        handeleLogin();
+        handlerLogin();
         setCurrentUser(data);
         history.push('/');
       } else {
@@ -147,7 +147,7 @@ function App() {
   }
 
   // функция обаботки данных о пользователе
-  function handleUpdateUser(data) {
+  function handlerUpdateUser(data) {
     mainApi.setUserInfo(data)
     .then((dataInfo) => {
       if (dataInfo) {
@@ -164,16 +164,17 @@ function App() {
   }
 
   // функция загрузки данных о фильмах
-  function handleLoadignMovies(name) {
-    handelPreloader();
+  function handlerLoadignMovies(name) {
+    handlerPreloader();
     setIsReqwestRes({
       text: '',
       visible: false
     });
+
     localStorage.removeItem('moviesList');
     moviesApi.getInitialCards()
       .then((data) => {
-        const movie = handelSelectMovie(data, name);
+        const movie = handlerSelectMovie(data, name);
         setIsTrunOn(false);
         return movie;
       })
@@ -184,7 +185,7 @@ function App() {
       .then((movies) => {
         if (movies.length === 0) {
           setIsReqwestRes({
-            text: okReqwestRes,
+            text: OK_RES,
             visible: true
           });
           setIsGetMoviesCards(movies);
@@ -195,9 +196,10 @@ function App() {
       .catch((err) => {
         console.log(err)
         setIsReqwestRes({
-          text: badReqwestRes,
+          text: BAD_RES,
           visible: true
         });
+        setIsTrunOn(false);
       })
   }
 
@@ -227,11 +229,11 @@ function App() {
   }
 
   // обработчик поиска по соханенным фильмам
-  function handleSaveMovieSelect(name) {
-    const movies = handelSelect(isSaveMoviesCard, name);
+  function handlerSaveMovieSelect(name) {
+    const movies = handlerSelect(isSaveMoviesCard, name);
     if (movies.length === 0) {
       setIsReqwestRes({
-        text: okReqwestRes,
+        text: OK_RES,
         visible: true
       });
       return setIsSaveMoviesVisible(movies);
@@ -243,11 +245,11 @@ function App() {
   return (
     <CurrentUserContext.Provider value={currentUser}>
       <div className="app">
-        <Header visible={isNavVisible} onNavOpen={handaleNavOpen} />
+        <Header visible={isNavVisible} onNavOpen={handlerNavOpen} />
         <Navigation
           visible={isNavVisible}
           navOpen={isNavOpen}
-          navClose={handleNavClose} />
+          navClose={handlerNavClose} />
         <Switch>
           <Route path="/signin">
             <Login
@@ -266,9 +268,9 @@ function App() {
             loggedIn={loggedIn}
             component={Movies}
             moviesCards={isGetMoviesCards}
-            onLoadignCards={handleLoadignMovies}
+            onLoadignCards={handlerLoadignMovies}
             turnOn={isTurnOn}
-            preloaderOn={handelPreloader}
+            preloaderOn={handlerPreloader}
             reqwestRes={isRrequestRes}
             onSaveMovie={makeSaveMovie}
             saveMoviesCards={isSaveMoviesCard}
@@ -278,7 +280,7 @@ function App() {
             component={SavedMovies}
             moviesCards={isSaveMoviesVisible}
             saveMoviesCards={isGetMoviesCards}
-            onLoadignCards={handleSaveMovieSelect}
+            onLoadignCards={handlerSaveMovieSelect}
             reqwestRes={isRrequestRes}
             onSaveMovie={makeSaveMovie}
           />
@@ -286,7 +288,7 @@ function App() {
             loggedIn={loggedIn}
             component={Profile}
             signOut={signOut}
-            onUpdateUser={handleUpdateUser}
+            onUpdateUser={handlerUpdateUser}
             messege={updateUserMessege} />
           <Route path="/*">
             <PageNotFound />

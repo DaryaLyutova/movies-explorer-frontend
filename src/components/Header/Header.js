@@ -15,7 +15,7 @@ function Header(props) {
     });
 
 
-    function handelHeaderType() {
+    function handlerHeaderType() {
         if (location.pathname === '/') {
             isHeaderType({
                 color: '#5C5C5C',
@@ -53,7 +53,7 @@ function Header(props) {
     }
 
     React.useEffect(() => {
-        handelHeaderType();
+        handlerHeaderType();
     }, [location.pathname])
 
     return (

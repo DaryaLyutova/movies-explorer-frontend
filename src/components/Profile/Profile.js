@@ -59,19 +59,15 @@ function Profile({ signOut, onUpdateUser, ...props }) {
         setInputError({ ...inputError, email: !reg.test(e.target.value) })
     };
 
-    function handleSubmit(e) {
+    function handlerSubmit(e) {
         e.preventDefault();
         onUpdateUser(inputValue);
-        setInputValue({
-            name: '',
-            email: '',
-        })
     };
 
     return (
         <section className="profile">
             <h1 className="profile__title">Привет, {currentUser.name}!</h1>
-            <form className="profile__form" onSubmit={handleSubmit}>
+            <form className="profile__form" onSubmit={handlerSubmit}>
                 <label className="profile__label">Имя
             <input
                         className="profile__input profile__input_error"

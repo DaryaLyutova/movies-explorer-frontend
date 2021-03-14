@@ -52,13 +52,13 @@ function Register(props) {
     }, [inputError]);
 
     //обработчик инпута имени
-    function handelNameChange(e) {
+    function handlerNameChange(e) {
         setInputValue({ ...inputValue, name: e.target.value })
         setInputError({ ...inputError, name: e.target.value.length < 3 })
     };
 
     //обработчик инпута email
-    function handelEmailChange(e) {
+    function handlerEmailChange(e) {
         setInputValue({ ...inputValue, email: e.target.value })
         const reg = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
         setInputError({ ...inputError, email: !reg.test(e.target.value) })
@@ -70,7 +70,7 @@ function Register(props) {
         setInputError({ ...inputError, password: e.target.value.length < 8 })
     };
 
-    function handelSubmit(e) {
+    function handlerSubmit(e) {
         e.preventDefault();
         props.onRegistration(inputValue);
         setInputValue({
@@ -82,7 +82,7 @@ function Register(props) {
 
     return (
         <section className="register">
-            <form className="register__form" onSubmit={handelSubmit}>
+            <form className="register__form" onSubmit={handlerSubmit}>
                 <fieldset className="register__block">
                     <h1 className="register__title">Добро пожаловать!</h1>
                     <Input
@@ -98,7 +98,7 @@ function Register(props) {
                         }}
                         style={{ color: inputError.name & inputDirty.name ? 'red' : 'black' }}
                         onChange={(e) => {
-                            handelNameChange(e)
+                            handlerNameChange(e)
                         }}
                         errorMassege={'Введите имя'}
                     />
@@ -113,7 +113,7 @@ function Register(props) {
                         }}
                         style={{ color: inputError.email & inputDirty.email ? 'red' : 'black' }}
                         onChange={(e) => {
-                            handelEmailChange(e)
+                            handlerEmailChange(e)
                         }}
                         errorMassege={'Введите email'}
                     />

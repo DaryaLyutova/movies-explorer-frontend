@@ -6,7 +6,7 @@ function MoviesCard(props) {
     const isSaveDefault = props.saveMoviesCards.some(i => i.movieId === props.moviesCard.movieId);
     const [isSave, setIsSave] = React.useState(isSaveDefault);
 
-    function handelSaveMovieClick() {
+    function handlerSaveMovieClick() {
         props.onSaveMovie(props.moviesCard);
         setIsSave(!isSave);
     };
@@ -21,7 +21,7 @@ function MoviesCard(props) {
                 <button
                     type="button"
                     className={`movies-card__button ${props.buttonClass} ${isSave ? 'movies-card__save_color' : ''}`}
-                    onClick={handelSaveMovieClick} />
+                    onClick={handlerSaveMovieClick} />
             </div>
             <a href={props.moviesCard.trailer} target="_blank" className="movies-card__link">
                 <img alt={`изображение ${props.moviesCard.nameRU}`} src={props.moviesCard.image}

@@ -1,4 +1,4 @@
-const handelSelect = (data, name) => {
+const handlerSelect = (data, name) => {
   let someMovies = data.filter((item) => {
     if (item.nameRU.includes(name)) {
       return item;
@@ -7,8 +7,8 @@ const handelSelect = (data, name) => {
   return someMovies;
 };
 
-const handelSelectMovie = (data, name) => {
-  const someMovies = handelSelect(data, name);
+const handlerSelectMovie = (data, name) => {
+  const someMovies = handlerSelect(data, name);
   const movies = someMovies.map((item) => {
     return item = {
       country: item.country,
@@ -36,4 +36,4 @@ const filterDuration = (data) => {
   return someMovies;
 }
 
-export { handelSelectMovie, handelSelect, filterDuration };
+export { handlerSelectMovie, handlerSelect, filterDuration };

@@ -10,7 +10,7 @@ function SavedMovies(props) {
         setIsMovies(props.moviesCards);
     }, [props.moviesCards]);
 
-    function handelFilterDurationMovie(isFilter) {
+    function handlerFilterDurationMovie(isFilter) {
         if (isFilter) {
             const selectedMovies = filterDuration(props.moviesCards);
             setIsMovies(selectedMovies);
@@ -24,7 +24,7 @@ function SavedMovies(props) {
             <div className="saved-movies__form-block">
                 <SearchForm
                     onLoadignCards={props.onLoadignCards}
-                    handelFilterDurationMovie={handelFilterDurationMovie}
+                    handlerFilterDurationMovie={handlerFilterDurationMovie}
                 />
                 <div className="saved-movies__line" />
             </div>

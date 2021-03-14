@@ -1,34 +1,39 @@
 import React from 'react';
 import './MoviesCardList.css';
 import MoviesCard from '../MoviesCard/MoviesCard';
+import { MOVIE_QUANTITY,
+    MOVIE_QUANTITY_PAD,
+    MOVIE_QUANTITY_MOBILE,
+    ADD_MOVIE_QUANTITY,
+    ADD_MOVIE_QUANTITY_MOBILE } from '../../utils/consts';
 
 function MoviesCardList(props) {
 
     const [quantity, setQuantity] = React.useState(12);
     const whidth = document.documentElement.clientWidth;
 
-    function handleQuantity() {
+    function handlerQuantity() {
         function whidthMonitor() {
             if (whidth < 635) {
-                setQuantity(5);
+                setQuantity(MOVIE_QUANTITY_MOBILE);
             } else {
                 if (whidth < 1010) {
-                    setQuantity(8);
+                    setQuantity(MOVIE_QUANTITY_PAD);
                 } else {
-                    setQuantity(12);
+                    setQuantity(MOVIE_QUANTITY);
                 }
             }
         };
         setTimeout(whidthMonitor, 1000);
     };
 
-    function handelLoadCards() {
+    function handlerLoadCards() {
         if (whidth < 1010) {
-            setQuantity(quantity + 2);
-        } else { setQuantity(quantity + 3) }
+            setQuantity(quantity + ADD_MOVIE_QUANTITY_MOBILE);
+        } else { setQuantity(quantity + ADD_MOVIE_QUANTITY) }
     };
 
-    window.addEventListener('resize', handleQuantity, false);
+    window.addEventListener('resize', handlerQuantity, false);
 
     return (
         <section className="movies-cardlist">
@@ -47,7 +52,7 @@ function MoviesCardList(props) {
             <button
                 className={`movies-cardlist__button 
                 ${(props.moviesCards.length > quantity && quantity >= 3) ? 'movies-cardlist__button_visible' : ''}`}
-                onClick={handelLoadCards}
+                onClick={handlerLoadCards}
             >Ещё
             </button>
         </section>

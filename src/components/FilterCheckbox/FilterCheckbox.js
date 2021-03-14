@@ -10,9 +10,9 @@ function FilterCheckbox(props) {
         setIsFilter(!isFilter);
     }
 
-    function handelFilter() {
+    function handlerFilter() {
         checkedActive();
-        props.handelFilterDurationMovie(!isFilter);
+        props.handlerFilterDurationMovie(!isFilter);
     };
 
     return (
@@ -20,7 +20,7 @@ function FilterCheckbox(props) {
             <input 
             type="checkbox" 
             className="filter-checkbox__button filter-checkbox__button_visible" 
-            onChange={handelFilter}
+            onChange={handlerFilter}
             checked={isFilter}
             />
                 Короткометражки

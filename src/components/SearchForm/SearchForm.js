@@ -8,14 +8,14 @@ function SearchForm(props) {
 
     const nameRef = React.useRef('');
     
-    function handelSubmitForm(event) {
+    function handlerSubmitForm(event) {
         event.preventDefault();
         props.onLoadignCards(nameRef.current.value);
     }
 
     return (
         <div className="seach-form">
-            <form className="seach-form__form" onSubmit={handelSubmitForm}>
+            <form className="seach-form__form" onSubmit={handlerSubmitForm}>
                 <input
                     className="seach-form__input search-form__defolt-style"
                     placeholder="Фильм"
@@ -29,7 +29,7 @@ function SearchForm(props) {
             </form>
             <div className="search-form__line" />
             <FilterCheckbox 
-            handelFilterDurationMovie={props.handelFilterDurationMovie}
+            handlerFilterDurationMovie={props.handlerFilterDurationMovie}
             />
         </div>
     )

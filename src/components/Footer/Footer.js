@@ -6,7 +6,7 @@ function Footer() {
     const [componentVisible, isComponentVisible] = React.useState(false);
     const location = useLocation();
 
-    function handelHeaderTitle() {
+    function handlerHeaderTitle() {
         if (location.pathname === '/movies'
             || location.pathname === '/saved-movies'
             || location.pathname === '/') {
@@ -15,7 +15,7 @@ function Footer() {
     }
 
     React.useEffect(() => {
-        handelHeaderTitle();
+        handlerHeaderTitle();
     }, [location.pathname])
 
     return (

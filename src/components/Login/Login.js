@@ -45,7 +45,7 @@ function Login(props) {
       }
   }, [inputError]);
   //обработчик инпута email
-  function handelEmailChange(e) {
+  function handlerEmailChange(e) {
       setInputValue({ ...inputValue, email: e.target.value })
       const reg = /^[A-Z0-9._%+-]+@[A-Z0-9-]+.+.[A-Z]{2,4}$/i
       setInputError({ ...inputError, email: !reg.test(e.target.value) })
@@ -57,7 +57,7 @@ function Login(props) {
       setInputError({ ...inputError, password: e.target.value.length < 8 })
   };
 
-  function handelSubmit(e) {
+  function handlerSubmit(e) {
       e.preventDefault();
       props.onLogin(inputValue);
       setInputValue({
@@ -70,7 +70,7 @@ function Login(props) {
     
     return (
         <section className="login">
-            <form className="login__form" onSubmit={handelSubmit}>
+            <form className="login__form" onSubmit={handlerSubmit}>
                 <fieldset className="login__block">
                     <h1 className="login__title">Рады видеть!</h1>
                     <Input
@@ -84,7 +84,7 @@ function Login(props) {
                         }}
                         style={{ color: inputError.email & inputDirty.email ? 'red' : 'black' }}
                         onChange={(e) => {
-                            handelEmailChange(e)
+                            handlerEmailChange(e)
                         }}
                         errorMassege={'Введите email'}
                     />
