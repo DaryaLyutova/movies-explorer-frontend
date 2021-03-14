@@ -1,3 +1,4 @@
+import { DEFAULT_IMG, DAFAULT_TRAILER, } from './consts';
 const handlerSelect = (data, name) => {
   let someMovies = data.filter((item) => {
     if (item.nameRU.includes(name)) {
@@ -8,19 +9,18 @@ const handlerSelect = (data, name) => {
 };
 
 const handlerSelectMovie = (data, name) => {
-  const someMovies = handlerSelect(data, name);
-  const movies = someMovies.map((item) => {
+  const movies = data.map((item) => {
     return item = {
-      country: item.country,
-      director: item.director,
+      country: (item.country !== null && item.country !== undefined ? item.country : 'Неизвестно'),
+      director: (item.director !== null && item.director !== undefined ? item.director : 'Неизвестно'),
       duration: item.duration,
       year: item.year,
-      description: item.description,
-      image: `https://api.nomoreparties.co${item.image.url}`,
-      trailer: item.trailerLink,
-      thumbnail: `https://api.nomoreparties.co${item.image.url}`,
+      description: (item.description !== null && item.description !== undefined ? item.description : 'Неизвестно'),
+      image: (item.image !== null && item.image !== undefined ? `https://api.nomoreparties.co${item.image.url}` : DEFAULT_IMG),
+      trailer: (item.trailer !== undefined && item.trailer !== undefined ? item.trailer : DAFAULT_TRAILER),
+      thumbnail: (item.image !== null && item.image !== undefined ? `https://api.nomoreparties.co${item.image.url}` : DEFAULT_IMG),
       nameRU: item.nameRU,
-      nameEN: item.nameEN,
+      nameEN: (item.nameEN !== null && item.nameEN !== undefined ? item.nameEN : 'Неизвестно'),
       movieId: item.id,
     };
   });

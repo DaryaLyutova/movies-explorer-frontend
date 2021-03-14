@@ -27,7 +27,6 @@ function Movies(props) {
                 <SearchForm
                     onLoadignCards={props.onLoadignCards}
                     handlerFilterDurationMovie={handlerFilterDurationMovie}
-                    turnOn={props.preloaderOn}
                 />
                 <div className="movies__line" />
             </div>

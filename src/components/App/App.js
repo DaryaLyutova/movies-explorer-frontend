@@ -32,6 +32,7 @@ function App() {
   if (localStorage.getItem('moviesList')) {
     moviesList = JSON.parse(localStorage.getItem('moviesList'));
   }
+
   const [isGetMoviesCards, setIsGetMoviesCards] = React.useState(moviesList);
   const [isSaveMoviesCard, setIsSaveMoviesCard] = React.useState([]);
   const [isSaveMoviesVisible, setIsSaveMoviesVisible] = React.useState([]);
@@ -61,10 +62,6 @@ function App() {
         })
     }
   }, []);
-
-  function handlerPreloader() {
-    setIsTrunOn(!isTurnOn);
-  };
 
   function handlerNavVisible() {
     if (loggedIn) {
@@ -149,58 +146,73 @@ function App() {
   // функция обаботки данных о пользователе
   function handlerUpdateUser(data) {
     mainApi.setUserInfo(data)
-    .then((dataInfo) => {
-      if (dataInfo) {
-        console.log(dataInfo)
-        setCurrentUser(dataInfo.user);
-        setUpdateUserMessege('Данные успешно редактированы');
-      } else {
+      .then((dataInfo) => {
+        if (dataInfo) {
+          setCurrentUser(dataInfo.user);
+          setUpdateUserMessege('Данные успешно редактированы');
+        } else {
+          setUpdateUserMessege('Произошла ошибка');
+        }
+      }).catch((err) => {
         setUpdateUserMessege('Произошла ошибка');
-      }
-    }).catch((err) => {
-      setUpdateUserMessege('Произошла ошибка');
-      console.log(err);
-    })
+        console.log(err);
+      })
   }
 
   // функция загрузки данных о фильмах
   function handlerLoadignMovies(name) {
-    handlerPreloader();
+    setIsTrunOn(true);
     setIsReqwestRes({
       text: '',
       visible: false
     });
-
+    const moviesListDefault = JSON.parse(localStorage.getItem('moviesListDefault'));
     localStorage.removeItem('moviesList');
-    moviesApi.getInitialCards()
-      .then((data) => {
-        const movie = handlerSelectMovie(data, name);
-        setIsTrunOn(false);
-        return movie;
-      })
-      .then((movies) => {
-        localStorage.setItem('moviesList', JSON.stringify(movies));
-        return movies;
-      })
-      .then((movies) => {
-        if (movies.length === 0) {
-          setIsReqwestRes({
-            text: OK_RES,
-            visible: true
-          });
-          setIsGetMoviesCards(movies);
-        } else {
-          setIsGetMoviesCards(movies);
-        }
-      })
-      .catch((err) => {
-        console.log(err)
+    if (moviesListDefault) {
+      const movieSelect = handlerSelect(moviesListDefault, name);
+      if (movieSelect.length === 0) {
         setIsReqwestRes({
-          text: BAD_RES,
+          text: OK_RES,
           visible: true
         });
-        setIsTrunOn(false);
-      })
+        setIsGetMoviesCards(movieSelect);
+      } else {
+        setIsGetMoviesCards(movieSelect);
+      }
+      setIsTrunOn(false);
+    } else {
+      moviesApi.getInitialCards()
+        .then((movies) => {
+          const moviesSave = handlerSelectMovie(movies, name);
+          localStorage.setItem('moviesListDefault', JSON.stringify(moviesSave));
+          return moviesSave;
+        })
+        .then((movies) => {
+          const movieSelect = handlerSelect(movies, name);
+          localStorage.setItem('moviesList', JSON.stringify(movieSelect));
+          return movieSelect;
+        })
+        .then((movieSelect) => {
+          if (movieSelect.length === 0) {
+            setIsReqwestRes({
+              text: OK_RES,
+              visible: true
+            });
+            setIsGetMoviesCards(movieSelect);
+          } else {
+            setIsGetMoviesCards(movieSelect);
+          }
+          setIsTrunOn(false);
+        })
+        .catch((err) => {
+          console.log(err);
+          setIsTrunOn(false);
+          setIsReqwestRes({
+            text: BAD_RES,
+            visible: true
+          });
+        })
+    }
   }
 
   // функция добавления фильмов в избранное
@@ -270,7 +282,6 @@ function App() {
             moviesCards={isGetMoviesCards}
             onLoadignCards={handlerLoadignMovies}
             turnOn={isTurnOn}
-            preloaderOn={handlerPreloader}
             reqwestRes={isRrequestRes}
             onSaveMovie={makeSaveMovie}
             saveMoviesCards={isSaveMoviesCard}
