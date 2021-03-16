@@ -100,10 +100,6 @@
     margin-top: 127px;
 }
 
-.login__button-error_visible {
-    visibility: hidden;
-}
-
 @media all and (max-width: 425px) {        
     .login__title {
         font-size: 24px;
