@@ -277,7 +277,7 @@ function App() {
             <Main />
           </Route>
           <ProtectedRoute path="/movies"
-            // loggedIn={loggedIn}
+            loggedIn={loggedIn}
             component={Movies}
             moviesCards={isGetMoviesCards}
             onLoadignCards={handlerLoadignMovies}
@@ -287,7 +287,7 @@ function App() {
             saveMoviesCards={isSaveMoviesCard}
           />
           <ProtectedRoute path="/saved-movies"
-            // loggedIn={loggedIn}
+            loggedIn={loggedIn}
             component={SavedMovies}
             moviesCards={isSaveMoviesVisible}
             saveMoviesCards={isGetMoviesCards}
@@ -296,7 +296,7 @@ function App() {
             onSaveMovie={makeSaveMovie}
           />
           <ProtectedRoute path="/profile"
-            // loggedIn={loggedIn}
+            loggedIn={loggedIn}
             component={Profile}
             signOut={signOut}
             onUpdateUser={handlerUpdateUser}
