@@ -105,7 +105,7 @@ class MainApi {
 
 //создание экземпляра класса
 const mainApi = new MainApi({
-  url: 'https://api.lutowa.diploma.students.nomoredomains.monster',
+  url: 'https://api.lutowa.movies.students.nomoredomains.monster',
   headers: {
     'Content-Type': 'application/json',
     authorization: `Bearer ${localStorage.getItem('token')}`,

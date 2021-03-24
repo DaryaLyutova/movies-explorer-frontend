@@ -16,4 +16,4 @@ Frontend дипломного проекта. Сверстаны все осно
 
 ### Проект доступен по адресу:
 
-https://lutowa.diploma.students.nomoredomains.monster
+https://lutowa.movies.students.nomoredomains.monster
