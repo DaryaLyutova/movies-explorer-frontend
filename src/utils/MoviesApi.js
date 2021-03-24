@@ -22,7 +22,7 @@ class MoviesApi {
 
 //создание экземпляра класса
 const moviesApi = new MoviesApi({
-    url: 'http://api.nomoreparties.co/beatfilm-movies',
+    url: 'https://api.nomoreparties.co/beatfilm-movies',
     headers: {
         'Content-Type': 'application/json',
         // authorization: `Bearer ${localStorage.getItem('token')}`,
