@@ -16,6 +16,20 @@
     margin: 70px 0 10px 0;
 }
 
+.saved-movies__request-res {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #A0A0A0;
+    font-size: 24px;
+    line-height: 29px;
+}
+
+.saved-movies__request-res_visible {
+    display: none;
+}
+
+
 @media all and (max-width: 880px) {
     .saved-movies__form-block {
         margin: 80px 30px 70px 30px;

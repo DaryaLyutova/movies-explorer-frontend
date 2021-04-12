@@ -99,10 +99,6 @@
     margin-top: 37px;
 }
 
-.register__button-error_visible {
-    visibility: hidden;
-}
-
 @media all and (max-width: 425px) {        
     .register__title {
         font-size: 24px;

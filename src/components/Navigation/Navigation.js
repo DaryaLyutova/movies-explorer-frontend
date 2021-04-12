@@ -8,7 +8,7 @@ function Navigation(props) {
 
     return (
         <nav
-            className={`navigation ${!props.visible ? 'navigation_none' : ''} 
+            className={`navigation ${props.visible ? 'navigation_none' : ''} 
             ${props.navOpen ? 'navigation_open' : ''}`} >
             <div className="navigation__container">
                 <button 

@@ -15,7 +15,7 @@ function Header(props) {
     });
 
 
-    function handelHeaderType() {
+    function handlerHeaderType() {
         if (location.pathname === '/') {
             isHeaderType({
                 color: '#5C5C5C',
@@ -53,7 +53,7 @@ function Header(props) {
     }
 
     React.useEffect(() => {
-        handelHeaderType();
+        handlerHeaderType();
     }, [location.pathname])
 
     return (
@@ -72,14 +72,14 @@ function Header(props) {
                 </div>
             </Link>
             <button
-                className={`header__nav-button ${!props.visible ? 'header__nav-button_display' : ''}`}
+                className={`header__nav-button ${props.visible ? 'header__nav-button_display' : ''}`}
                 onClick={props.onNavOpen} />
             <ul className={`header__button-list 
-            ${headerType.buttonVisible ? 'header__button-list_display' : ''}`}
+            ${(!props.visible && headerType.buttonVisible) ? 'header__button-list_display' : ''}`}
             >
                 <li>
                     <Link
-                        to="/signiup"
+                        to="/signup"
                         className="header__button-signup"
                     >Регистрация</Link>
                 </li>
