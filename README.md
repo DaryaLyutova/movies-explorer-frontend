@@ -14,12 +14,7 @@ Frontend дипломного проекта. Сверстаны все осно
 - устанивить зависимости `git install`
 - запустить проект `npm start`
 
-<<<<<<< HEAD
-### movies-explorer-frontend
-=======
-https://lutowa.movies.students.nomoredomains.monster
 =======
 ### Проект доступен по адресу:
 
-https://lutowa.diploma.students.nomoredomains.monster
->>>>>>> 6bf8604a826530b9e8f9d0254e2229dd81693b1a
+https://lutowa.movies.students.nomoredomains.monster
